@@ -16,9 +16,9 @@ class CreateCommandesTable extends Migration
         Schema::create('commandes', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('etat',20);
-            $table->integer('id_client');
-            $table->integer('id_serveur');
-            $table->integer('id_valideur');
+            $table->Biginteger('id_client');
+            $table->Biginteger('id_serveur');
+            $table->Biginteger('id_valideur');
             $table->string('type',10);
             $table->timestamps();
         });
