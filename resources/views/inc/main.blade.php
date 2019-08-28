@@ -88,39 +88,6 @@
                 </div>
             </div>
             
-            <hr class="hr my-5">    
-
-            <div class="container">
-                    <h2 class="text-center font-weight-bold mb-5">Contact Us</h2>
-                <div class="row text-center">
-                    <div class="col-lg-5 col-md-12" >
-                            <form class=" mb-4 p-4 grey-text border border-black">
-
-                                    <div class="md-form form-sm">
-                                            <label for="form3">Your name</label>
-                                      <input type="text" id="form3"name="name" class="form-control form-control-sm">
-                                    </div>
-                                    <div class="md-form form-sm">
-                                            <label for="form2">Your email</label>
-                                      <input type="text" id="form2"name="email" class="form-control form-control-sm">
-                                    </div>
-                                    <div class="md-form form-sm">
-                                            <label for="form34">Subject</label>
-                                      <input type="text" id="form32" name="subject" class="form-control form-control-sm">
-                                    </div>
-                                    <div class="md-form form-sm"><label for="form8">Your message</label>
-                                      <textarea type="text" id="form8" class="md-textarea form-control form-control-sm" rows="4"></textarea>
-                                    </div>
-                                    <div class="text-center mt-4">
-                                      <button class="btn btn-primary">Send</button>
-                                    </div>
-                                  </form>
-                    </div>
-                    <div class="col-lg-7 col-md-12">
-                            <div id="map-container " class="z-depth-1-half map-container mb-5" style="height:400px"> </div>
-                            
-                    </div>
-                </div>
-            </div>
+           
 
 

@@ -12,19 +12,18 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
-});
-
-
-Route::get('start',function(){
     return view('start');
 });
 
+
+//just for testing
 Route::get('cards',function(){
 
     return view('cards');
 });
 
+
+//just for testing
 Route::get('user',function(){
 
     return view('userprofile');
