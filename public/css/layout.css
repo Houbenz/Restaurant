@@ -1,0 +1,16 @@
+html,body,header,#intro{
+    height: 100%;
+}
+
+#intro{
+
+background: url("pictures/main.jpg");
+-webkit-background-size: cover;
+-moz-background-size: cover;
+-o-background-size: cover;
+background-size: cover;
+}
+
+.text-footer-border{
+    border-bottom:4px solid white;
+}
