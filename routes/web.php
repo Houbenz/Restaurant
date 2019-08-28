@@ -32,3 +32,5 @@ Route::get('user',function(){
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::post('/updateprofile','ModifyUserController@modify');

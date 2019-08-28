@@ -12,12 +12,22 @@
         <div class="navbar-nav ml-auto">
             @if(Route::has('login'))
               @auth
-        <span class=" nav-link drop-down text-white mr-2"><strong> {{Auth::user()->nom}} </strong></span>
+              <div class="dropdown">
+                 <span class=" btn btn-grey nav-link drop-down dropdown-toggle text-white mr-5" data-toggle="dropdown">
+                     <strong> {{Auth::user()->nom}} </strong></span>
+                 <div class="dropdown-menu">
+                     <a href="#" class="dropdown-item">Link 1</a>
 
-        <form action="{{route('logout')}}" method="POST">
-            @csrf
-        <button type="submit" class="btn btn-danger ">Logout</button>
-        </form>
+                 <a href="/user" class="dropdown-item">Profile</a>
+                 
+                     <form action="{{route('logout')}}" method="POST">
+                            @csrf
+                        <button type="submit" class=" dropdown-item text-danger ">Logout</button>
+                        </form>
+                 </div>
+             </div>
+
+      
              @else
                     <a href="{{route('register')}}" class="nav-item btn btn-warning mr-3">Register</a>
 

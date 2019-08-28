@@ -36,6 +36,11 @@ $('.carousel').carousel({
     interval :2000,
 })
 </script>
+<script src="js/userprofile.js">
+
+
+document.getElementById("nom").removeAttribute('disabled');
+</script>
 </body>
 <style>
     #intro{

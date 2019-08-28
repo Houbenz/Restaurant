@@ -1,6 +1,15 @@
 @extends('layouts.app')
 
 @section('content')
+
+@if(count($errors))
+@foreach ($errors->all as $item)
+    
+<div class="alert alert-danget">{{$item}}</div>
+
+@endforeach
+@endif
+
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -8,9 +17,9 @@
                 <div class="card-header">Dashboard</div>
 
                 <div class="card-body">
-                    @if (session('status'))
+                    @if (session('success'))
                         <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
+                            {{ session('success') }}
                         </div>
                     @endif
 
