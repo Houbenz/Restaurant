@@ -16,7 +16,7 @@
                  <span class=" btn btn-grey nav-link drop-down dropdown-toggle text-white mr-5" data-toggle="dropdown">
                      <strong> {{Auth::user()->nom}} </strong></span>
                  <div class="dropdown-menu">
-                     <a href="#" class="dropdown-item">Link 1</a>
+                     <a href="/all_plats" class="dropdown-item">Menus</a>
 
                  <a href="/user" class="dropdown-item">Profile</a>
                  

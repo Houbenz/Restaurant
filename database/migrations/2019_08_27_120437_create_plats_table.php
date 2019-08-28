@@ -20,6 +20,7 @@ class CreatePlatsTable extends Migration
             $table->double('prix');
             $table->text('ingrediants');
             $table->integer('disponibilite');
+            $table->string('cover_image');
             $table->timestamps();
         });
     }

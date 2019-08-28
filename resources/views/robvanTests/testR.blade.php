@@ -2,18 +2,28 @@
 
 @section('content')
         <div class='jumbotron text-center col-8 offset-2'>
-            name : {{$user->nom}}
+            name : {{Auth::user()->nom}}
             <br>
-            num tel: {{$user->num_tel}}
+            num tel: {{Auth::user()->num_tel}}
             <br>
-            @if (count($errors) > 0)
+                 @if(count($errors) > 0)
+            
+                    @foreach ($errors as $error)
                     <div class="alert alert-danger">
                         {{$errors}}
                     </div>
-            @endif
+                    @endforeach
+                @endif
+                @if(session('message'))
+                <div class="alert alert-success">
+                        {{session('message')}}
+                </div>
+                @endif
             <br><br><br>
-            {{ Form::open(['action' => 'platsController@store' ,'method' => 'post']) }}
-	        <div class="form-group">
+            {{ Form::open(['action' => 'platsController@store' ,'method' => 'post','enctype' => 'multipart/form-data']) }}
+                
+            @csrf
+                 <div class="form-group">
                 {{Form::label('nom','Nom Plat :')}}
                 {{Form::text('nom','',['placeholder' => 'Nom du plat','class' => 'form-control'])}}
             </div>
@@ -37,9 +47,9 @@
                     {{Form::number('disp','',['class' => 'form-control'])}}
             </div>
             
-            <!--<div class="form-group">
-                {{Form::file('cover_image',['class' => 'form-control'])}}
-            </div>-->
+            <div class="form-group">
+                {{Form::file('cover_image')}}
+            </div>
 
             {{Form::submit('Save post',['class' => 'offset-9 btn btn-lg btn-primary col-3'])}}
         {{ Form::close() }}

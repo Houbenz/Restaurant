@@ -33,6 +33,8 @@ class PlatsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
+
     public function store(Request $request)
     {
         //validation
@@ -41,15 +43,14 @@ class PlatsController extends Controller
             'type' => 'required',
             'prix'=> 'required|integer|between:10,1500',
             'disp' => 'required|in:0,1',
-            'ingrediant' => 'required'
-
-            //'cover_image' => 'image|nullable|max:1999'
+            'ingrediant' => 'required',
+            'cover_image' => 'image|max:1999',
         ]);
-
-        /*hundle file upload
-        if($request -> hasFile('cover_image')){
+        
+        //handle file upload
+       // if($request -> hasFile('cover_image')){
             //get filename with the extension
-            $fileNameWithExt = $request ->file('cover_image')->getClientOriginalName();
+            $fileNameWithExt = $request->file('cover_image')->getClientOriginalName();
             //Get just filename
             $filename = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
             //get just ext
@@ -57,14 +58,13 @@ class PlatsController extends Controller
             //file name to store
             $fileNameToStore = $filename.'_'.time().'.'.$extension;
             //upload image
-            $path = $request->file('cover_image')->storeAs('public/cover_images', $fileNameToStore);
-
-            
-        }
-        else{
-            $fileNameToStore = 'noimage.jpg';
-        }
-        */
+             $request->file('cover_image')->storeAs('public/cover_images', $fileNameToStore);          
+       // }
+        //else{
+        //    $fileNameToStore = 'noimage.jpg';
+        //}
+        
+        
         $plat = new plat;
 
         $plat->nom = $request->input('nom');
@@ -73,10 +73,10 @@ class PlatsController extends Controller
         $plat->prix = $request->input('prix');
         $plat->ingrediants = $request->input('ingrediant');
         $plat->disponibilite = $request->input('disp');
-
+        $plat->cover_image=$fileNameToStore;
         $plat->save();
 
-        return redirect('/tr')->with('errors','plat saved successfully');
+        return redirect('/tr')->with('message','plat sauvgardé avec succés');
 
     }
 
@@ -134,5 +134,12 @@ class PlatsController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+
+    public function getPlats(){
+        $plats= Plat::all();
+
+        return view("Plats.show")->with('plats',$plats);
     }
 }
