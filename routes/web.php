@@ -33,3 +33,7 @@ Route::get('user',function(){
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/tr', 'PagesController@testRobvan');
+
+Route::resource('plats','platsController');
