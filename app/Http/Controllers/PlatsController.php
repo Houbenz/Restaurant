@@ -76,7 +76,7 @@ class PlatsController extends Controller
 
         $plat->save();
 
-        return redirect('/tr')->with('','plat saved successfully');
+        return redirect('/tr')->with('errors','plat saved successfully');
 
     }
 

@@ -7,12 +7,9 @@
             num tel: {{$user->num_tel}}
             <br>
             @if (count($errors) > 0)
-                @foreach ($errors->all() as $error)
                     <div class="alert alert-danger">
-                        {{$error}}
+                        {{$errors}}
                     </div>
-                @endforeach
-    
             @endif
             <br><br><br>
             {{ Form::open(['action' => 'platsController@store' ,'method' => 'post']) }}
