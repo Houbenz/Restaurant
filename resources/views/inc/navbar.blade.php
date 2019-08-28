@@ -10,7 +10,15 @@
             <a href="#" class="nav-item nav-link h5 text-white">About Us</a>
         </div>
         <div class="navbar-nav ml-auto">
-            <div class="nav-item btn btn-warning mr-3">Login</div>
-            <div class="nav-item btn btn-primary">Register</div>
+            @if(Route::has('login'))
+            @auth
+        <a href="{{route('home')}}" class="btn btn-primary">Home</a>
+            @else
+        <a href="{{route('register')}}" class="nav-item btn btn-warning mr-3">Register</a>
+       @if(Route::has('register'))
+        <a href="{{route('login')}}" class="nav-item btn btn-primary " >Login</a>
+        @endif
+        @endauth
+        @endif
         </div>
 </div>

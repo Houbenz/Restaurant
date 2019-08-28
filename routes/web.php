@@ -15,10 +15,21 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
+Route::get('start',function(){
+    return view('start');
+});
+
+Route::get('cards',function(){
+
+    return view('cards');
+});
+
+Route::get('user',function(){
+
+    return view('userprofile');
+});
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-
-Route::get('test',function(){
-    return view('test');
-});

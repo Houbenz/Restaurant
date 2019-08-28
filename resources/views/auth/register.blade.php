@@ -40,6 +40,26 @@
                         </div>
 
                         <div class="form-group row">
+                                <label for="adresse" class="col-md-4 col-form-label text-md-right">{{ __('Adresse') }}</label>
+    
+                                <div class="col-md-6">
+                                    <input id="adresse" type="text" class="form-control" name="adresse"
+                                     value="" required>
+    
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                    <label for="num_tel" class="col-md-4 col-form-label text-md-right">{{ __('Numero de Tél') }}</label>
+        
+                                    <div class="col-md-6">
+                                        <input id="num_Tel" type="text" class="form-control"
+                                          pattern="[0-9]{10}" name='num_tel' required>
+        
+                                    </div>
+                                </div>
+
+                        <div class="form-group row">
                             <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
 
                             <div class="col-md-6">
