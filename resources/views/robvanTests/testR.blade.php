@@ -2,7 +2,6 @@
 
 @section('content')
         <div class='jumbotron text-center col-8 offset-2'>
-<<<<<<< HEAD
                         <h3 class="text-center">Ajouter un plat</h3>
             name : {{Auth::user()->nom}}
             <br>
@@ -10,8 +9,6 @@
             <br>
             type : {{$user->type_client}}
             <br>
-=======
->>>>>>> 05e784036cc76e8e5c1cc54565fc34353bfe2314
                  @if(count($errors) > 0)
             
                     @foreach ($errors as $error)
