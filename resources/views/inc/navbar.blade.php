@@ -12,6 +12,13 @@
         <div class="navbar-nav ml-auto">
             @if(Route::has('login'))
               @auth
+
+              <!--Notification panel-->
+              <div class="btn btn-light  text-white mr-3">
+                    <img src="{{asset('pictures/cart.svg')}}" alt="img" width="32" height="32">
+                    <span id='cart_quantity' class="badge badge-light" style="margin-left:-4px">0</span>
+              </div>
+
               <div class="dropdown">
                  <span style="cursor:pointer" class=" btn btn-grey nav-link drop-down dropdown-toggle text-white mr-5" data-toggle="dropdown">
                      <strong> {{Auth::user()->nom}} </strong></span>

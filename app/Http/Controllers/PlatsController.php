@@ -146,4 +146,16 @@ class PlatsController extends Controller
         //
     }
 
+
+     public function addToCart(Request $request)
+    {
+
+        $request->session()->push('plats',$request->input('id'));
+
+
+        $plats =session('plats');
+
+
+        return response()->json(array('msg'=>count($plats)),200);
+    }
 }

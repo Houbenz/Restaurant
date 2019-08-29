@@ -14,15 +14,15 @@
             <div class="card" style="width:18rem;height:22rem">
                 <div class=" cover card__image card__image--fence" style="background-image:url('storage/cover_images/{{$plat->cover_image}}')"></div>
                 <div class="card__content">
-                <div class="card__title text-center">{{$plat->nom}}</div>
+                <div class="card__title text-center" >{{$plat->nom}}</div>
                 <p class="card__text">{{$plat->ingrediants}} </p>
-                <button class="btn btn--block card__btn btn-success">Acheter</button>
+                <button class="btn btn--block card__btn btn-success" onclick="addToCart('{{$plat->id}}','{{$plat->nom}}')">Ajouter au panier</button>
                 </div>
             </div>
-        
             </li>   
             @endforeach
     @endif
 </ul>
 </div>
 @endsection
+

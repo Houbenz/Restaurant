@@ -4,7 +4,7 @@ html,body,header,#intro{
 
 #intro{
 
-background: url("pictures/main.jpg");
+background: url("/pictures/main.jpg");
 -webkit-background-size: cover;
 -moz-background-size: cover;
 -o-background-size: cover;
