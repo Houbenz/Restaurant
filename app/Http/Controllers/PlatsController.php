@@ -29,6 +29,7 @@ class PlatsController extends Controller
     public function create()
     {
         //
+        return view('plats.create');
     }
 
     /**

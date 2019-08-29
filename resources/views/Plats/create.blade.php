@@ -2,16 +2,8 @@
 
 @section('content')
         <div class='jumbotron text-center col-8 offset-2'>
-<<<<<<< HEAD
-                        <h3 class="text-center">Ajouter un plat</h3>
-            name : {{Auth::user()->nom}}
+            <h3>Ajouter un nouveu plat</h3>
             <br>
-            num tel: {{Auth::user()->num_tel}}
-            <br>
-            type : {{$user->type_client}}
-            <br>
-=======
->>>>>>> 05e784036cc76e8e5c1cc54565fc34353bfe2314
                  @if(count($errors) > 0)
             
                     @foreach ($errors as $error)
@@ -69,6 +61,6 @@
                     </div>
 
                 {{Form::submit('Ajouter Plat',['class' => 'offset-9 btn btn-lg btn-primary col-3'])}}
-            {{ Form::close() }}
+                {{ Form::close() }}
         </div>
 @endsection
