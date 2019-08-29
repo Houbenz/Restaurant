@@ -13,12 +13,17 @@
             @if(Route::has('login'))
               @auth
               <div class="dropdown">
-                 <span class=" btn btn-grey nav-link drop-down dropdown-toggle text-white mr-5" data-toggle="dropdown">
+                 <span style="cursor:pointer" class=" btn btn-grey nav-link drop-down dropdown-toggle text-white mr-5" data-toggle="dropdown">
                      <strong> {{Auth::user()->nom}} </strong></span>
                  <div class="dropdown-menu">
-                     <a href="/all_plats" class="dropdown-item">Menus</a>
-
-                 <a href="/user" class="dropdown-item">Profile</a>
+                     <a href="/plats" class="dropdown-item">Menus</a>
+                    
+                    <a href="/user" class="dropdown-item">Profile</a>
+                    
+                    <!-- just poure le responsable-->
+                    @if (auth()->user()->type_client == 'responsable')
+                        <a class="dropdown-item" href="/plats/create">Ajouter un plat</a>
+                    @endif
                  
                      <form action="{{route('logout')}}" method="POST">
                             @csrf

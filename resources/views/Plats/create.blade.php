@@ -2,6 +2,8 @@
 
 @section('content')
         <div class='jumbotron text-center col-8 offset-2'>
+            <h3>Ajouter un nouveu plat</h3>
+            <br>
                  @if(count($errors) > 0)
             
                     @foreach ($errors as $error)
@@ -59,6 +61,6 @@
                     </div>
 
                 {{Form::submit('Ajouter Plat',['class' => 'offset-9 btn btn-lg btn-primary col-3'])}}
-            {{ Form::close() }}
+                {{ Form::close() }}
         </div>
 @endsection

@@ -53,13 +53,13 @@
                 
                 <div class="col-md-6">
                     <i>
-                        <img src="pictures/facebook.svg" alt="facebook" width="64" height="64" class="mr-5" >
+                        <img src="{{ asset('pictures/facebook.svg')}}" alt="facebook" width="64" height="64" class="mr-5" >
                     </i>
                     <i>
-                        <img src="pictures/instagram.svg" alt="instagram" width="64" height="64" class="mr-5" >
+                        <img src="{{ asset('pictures/instagram.svg')}}" alt="instagram" width="64" height="64" class="mr-5" >
                     </i>
                     <i>
-                        <img src="pictures/twitter.svg" alt="facebook" width="64" height="64" >
+                        <img src="{{asset('pictures/twitter.svg')}}" alt="facebook" width="64" height="64" >
                     </i>
                 </div>
 

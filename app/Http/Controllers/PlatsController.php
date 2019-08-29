@@ -15,7 +15,9 @@ class PlatsController extends Controller
      */
     public function index()
     {
-        //
+        $plat= plat::Find('1');
+
+        return view('plats.index')->with('plat',$plat);
     }
 
     /**
@@ -26,6 +28,7 @@ class PlatsController extends Controller
     public function create()
     {
         //
+        return view('plats.create');
     }
 
     /**
