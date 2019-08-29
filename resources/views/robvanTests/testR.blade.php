@@ -6,6 +6,8 @@
             <br>
             num tel: {{Auth::user()->num_tel}}
             <br>
+            type : {{$user->type_client}}
+            <br>
                  @if(count($errors) > 0)
             
                     @foreach ($errors as $error)
@@ -17,12 +19,6 @@
                 @if(session('message'))
                 <div class="alert alert-success">
                         {{session('message')}}
-                </div>
-                @endif
-                @if(count($plat) > 0)
-                <br>
-                <div class="alert alert-success">
-                       prix = {{$plat->prix}}
                 </div>
                 @endif
                 

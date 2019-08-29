@@ -38,5 +38,3 @@ Route::post('/updateprofile','ModifyUserController@modify');
 Route::get('/tr', 'PagesController@testRobvan');
 
 Route::resource('plats','platsController');
-
-Route::get('all_plats','platsController@getPlats');

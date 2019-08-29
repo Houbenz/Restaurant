@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\plat;
+use App\user;
 
 class PlatsController extends Controller
 {
@@ -92,8 +93,6 @@ class PlatsController extends Controller
         $plat = plat::find($id);
         
         return view('plats.show')->with('plat',$plat);
-        return redirect('/tr')->with('plat',$plat);
-
     }
 
     /**
@@ -111,7 +110,13 @@ class PlatsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $plat = plat::find($id);
+        $user= user::find(auth()->user()->id);
+        //check for user id
+        if($user->type_client !== 'responsable'){
+            return view('robvanTests.testR')->with('user',$user);
+        }
+        return view('plats.edit')->with('plat',$plat)->with('user',$user);
     }
 
     /**
@@ -137,10 +142,4 @@ class PlatsController extends Controller
         //
     }
 
-
-    public function getPlats(){
-        $plats= Plat::all();
-
-        return view("Plats.show")->with('plats',$plats);
-    }
 }
