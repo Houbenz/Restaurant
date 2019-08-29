@@ -4,7 +4,7 @@
         
     <div class="container pt-5">
 
-        <h3 class="text-center display-3 mb-4">Tout les plâts !</h3>
+        <h3 class="text-center display-3 mb-5">Tout les plâts !</h3>
     @if (count($plats) > 0)
                 
     <ul class="cards">

@@ -7,7 +7,11 @@
 
     <h3 class="text-center display-3 mb-4">Tout les plâts !</h3>
 
-    @if (count($plat) > 0)     
+<img src="{{asset('public/storage/cover_images/'.$plat->cover_image)}}" alt="dazd">
+
+<img src="pictures/facebook.svg" alt="vvvvvv">
+
+    @if ($plat)     
                 <div class="card" style="width:18rem">
                     <div class="card-image-top" style="width : 100%" src="../storage/cover_images/{{$plat->cover_image}}">
                         {{$plat->cover_image}}

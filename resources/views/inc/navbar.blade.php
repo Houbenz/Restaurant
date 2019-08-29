@@ -16,9 +16,10 @@
                  <span class=" btn btn-grey nav-link drop-down dropdown-toggle text-white mr-5" data-toggle="dropdown">
                      <strong> {{Auth::user()->nom}} </strong></span>
                  <div class="dropdown-menu">
-                     <a href="plats" class="dropdown-item">Menus</a>
+                     <a href="/plats" class="dropdown-item">Menus</a>
 
                  <a href="/user" class="dropdown-item">Profile</a>
+                 <a href="/tr" class="dropdown-item">Ajouter un plat</a>
                  
                      <form action="{{route('logout')}}" method="POST">
                             @csrf

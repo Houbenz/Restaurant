@@ -2,6 +2,8 @@
 
 @section('content')
         <div class='jumbotron text-center col-8 offset-2'>
+
+            <h3 class="text-center">Editer un plat</h3>
             name : {{Auth::user()->nom}}
             <br>
             type: {{$user->type_client}}

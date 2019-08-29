@@ -15,7 +15,10 @@ class PlatsController extends Controller
      */
     public function index()
     {
-        //
+
+            $plats =Plat::all();
+
+            return view('plats.index')->with("plats",$plats);
     }
 
     /**

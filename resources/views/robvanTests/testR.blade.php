@@ -2,6 +2,7 @@
 
 @section('content')
         <div class='jumbotron text-center col-8 offset-2'>
+                        <h3 class="text-center">Ajouter un plat</h3>
             name : {{Auth::user()->nom}}
             <br>
             num tel: {{Auth::user()->num_tel}}
