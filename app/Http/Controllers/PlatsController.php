@@ -48,7 +48,7 @@ class PlatsController extends Controller
         ]);
         
         //handle file upload
-       // if($request -> hasFile('cover_image')){
+        if($request -> hasFile('cover_image')){
             //get filename with the extension
             $fileNameWithExt = $request->file('cover_image')->getClientOriginalName();
             //Get just filename
@@ -59,10 +59,10 @@ class PlatsController extends Controller
             $fileNameToStore = $filename.'_'.time().'.'.$extension;
             //upload image
              $request->file('cover_image')->storeAs('public/cover_images', $fileNameToStore);          
-       // }
-        //else{
-        //    $fileNameToStore = 'noimage.jpg';
-        //}
+        }
+        else{
+            $fileNameToStore = 'noimage.jpg';
+        }
         
         
         $plat = new plat;
@@ -92,6 +92,7 @@ class PlatsController extends Controller
         $plat = plat::find($id);
         
         return view('plats.show')->with('plat',$plat);
+        return redirect('/tr')->with('plat',$plat);
 
     }
 

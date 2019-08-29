@@ -9,9 +9,8 @@
 
     <ul class="cards">
 
-        @if ($plats)
-            @foreach ($plats as $plat)
-
+        @if (count($plat) > 0)
+        {            
                 <li class="cards__item">
                 <div class="card" style="width:18rem;height:22rem">
                     <div class=" cover card__image card__image--fence" style="background-image:url('storage/cover_images/{{$plat->cover_image}}')"></div>
@@ -23,10 +22,14 @@
                 </div>
             
                 </li>
+        }
 
-
-                
-        @endforeach
+        }@else{
+            <br>
+            <div class="jumbotron text-center">
+                <h2>Aucun Plat dans</h2>
+            </div>
+        }
         @endif
     </ul>
 </div>

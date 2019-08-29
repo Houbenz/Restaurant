@@ -19,6 +19,13 @@
                         {{session('message')}}
                 </div>
                 @endif
+                @if(count($plat) > 0)
+                <br>
+                <div class="alert alert-success">
+                       prix = {{$plat->prix}}
+                </div>
+                @endif
+                
             <br><br><br>
             {{ Form::open(['action' => 'platsController@store' ,'method' => 'post','enctype' => 'multipart/form-data']) }}
                 
