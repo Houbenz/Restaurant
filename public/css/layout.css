@@ -4,8 +4,13 @@ html,body,header,#intro{
 
 #intro{
 
+<<<<<<< HEAD
 background: url("/pictures/main.jpg");
 -webkit-background-size: cover;
+=======
+background: url("../pictures/main.jpg");
+background-size: cover;-webkit-background-size: cover;
+>>>>>>> 7ed01205c594791e90083d071f0d49d20ef407ae
 -moz-background-size: cover;
 -o-background-size: cover;
 background-size: cover;
