@@ -11,10 +11,6 @@
 |
 */
 
-Route::get('/', function () {
-    return view('start');
-});
-
 
 //just for testing
 Route::get('cards',function(){
@@ -29,6 +25,8 @@ Route::get('user',function(){
     return view('userprofile');
 });
 
+Route::get('/', 'PagesController@index');
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
@@ -38,6 +36,5 @@ Route::post('/updateprofile','ModifyUserController@modify');
 Route::get('/tr', 'PagesController@testRobvan');
 
 Route::resource('plats','platsController');
-
 
 Route::post('/sendAjax','platsController@addToCart');
