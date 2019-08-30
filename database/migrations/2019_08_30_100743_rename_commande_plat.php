@@ -14,10 +14,10 @@ class RenameCommandePlat extends Migration
     public function up()
     {
         //Schema::rename('commande_plat_map', 'commande_plat');
-       /* Schema::table('commande_plat', function (Blueprint $table) {
+        Schema::table('commande_plat', function (Blueprint $table) {
             $table->renameColumn('id_commande', 'commande_id');
             $table->renameColumn('id_plat', 'plat_id');
-        });*/
+        });
     }
 
     /**

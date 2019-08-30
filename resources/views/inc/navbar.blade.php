@@ -40,7 +40,9 @@
                  <div class="dropdown-menu">
                      <a href="/plats" class="dropdown-item">Menus</a>
 
-                 <a href="/user" class="dropdown-item">Profile</a>
+                 <a href="/user" class="dropdown-item">Profile</a>    
+                 <a href="/commandes" class="dropdown-item">Mes commandes</a>
+                 
                 @if (auth()->user()->type_client == 'responsable')
                     <a href="/plats/create" class="dropdown-item">Ajouter un plat</a>
                 @endif     

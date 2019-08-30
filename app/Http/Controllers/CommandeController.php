@@ -15,7 +15,10 @@ class CommandeController extends Controller
      */
     public function index()
     {
-        //
+
+        $commandes = Commande::where('id_client',auth()->user()->id)->get();
+      
+         return view('commandes.index')->with('commandes',$commandes);
     }
 
     /**
@@ -43,7 +46,10 @@ class CommandeController extends Controller
         $commande->id_client = auth()->user()->id;
         $commande->type ='dehors';
         $commande->save();
-        $commande-> plat() -> attach($plats);
+        $commande->plat()->attach($plats);
+
+        //to remove plats from session when an commande is done
+        $request->session()->forget('plats');
 
         return redirect('/tr')->with('message','welldone');
     }
@@ -56,7 +62,9 @@ class CommandeController extends Controller
      */
     public function show($id)
     {
-        //
+        $plats= Commande::find($id)->plat;
+
+        return view('commandes.show',['plats'=> $plats,'command_id' => $id]);
     }
 
     /**

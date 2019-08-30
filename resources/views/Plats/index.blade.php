@@ -8,8 +8,7 @@
     @if (count($plats) > 0)
                 
     <ul class="cards">
-        @foreach ($plats as $plat)         
-        
+        @foreach ($plats as $plat) 
             <li class="cards__item">
                 <div class="card" style="width:18rem;height:22rem">
                     <div class=" cover card__image card__image--fence" style="background-image:url('storage/cover_images/{{$plat->cover_image}}')">

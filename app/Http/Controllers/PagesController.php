@@ -18,9 +18,18 @@ class PagesController extends Controller
     public function modifierPanier(){
         $listePlats = session('plats');
 
-        $plats = Plat::find($listePlats);
+        
+        $plats=array();
 
-        return view('commandes.panier')->with('plats',$plats);
+        if($listePlats){
+        for ($i=0; $i <count($listePlats) ; $i++) { 
+            
+             $plat = Plat::find($listePlats[$i]) ;
+
+            array_push($plats,$plat);
+        }
+    }
+        return view('panier')->with('plats',$plats);
 
     }
 
