@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatCommandsPlatsTable extends Migration
+class RenameCommandePlat extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,11 @@ class CreatCommandsPlatsTable extends Migration
      */
     public function up()
     {
-        Schema::create('commande_plat', function (Blueprint $table) {
-            $table->biginteger('commande_id')->unsigned();
-            $table->biginteger('plat_id')->unsigned();
-        });
+        //Schema::rename('commande_plat_map', 'commande_plat');
+       /* Schema::table('commande_plat', function (Blueprint $table) {
+            $table->renameColumn('id_commande', 'commande_id');
+            $table->renameColumn('id_plat', 'plat_id');
+        });*/
     }
 
     /**
@@ -26,6 +27,6 @@ class CreatCommandsPlatsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('commande_plat');
+        //
     }
 }

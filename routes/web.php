@@ -44,3 +44,4 @@ Route::get('/test',function(){
     return view('commandes');
 
 });
+Route::resource('commande','commandeController');
