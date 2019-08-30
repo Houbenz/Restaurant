@@ -16,7 +16,15 @@
               <!--Notification panel-->
               <div class="btn btn-light  text-white mr-3">
                     <img src="{{asset('pictures/cart.svg')}}" alt="img" width="32" height="32">
-                    <span id='cart_quantity' class="badge badge-light" style="margin-left:-4px">0</span>
+              <span id='cart_quantity' class="badge badge-light" style="margin-left:-4px">
+
+                @if (session('plats'))
+                {{count(session('plats'))}}
+             
+                @else
+                    0
+                @endif
+            </span>
               </div>
 
               <div class="dropdown">

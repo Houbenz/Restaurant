@@ -1,6 +1,16 @@
 
         //for ajax
-    
+
+
+        if(document.getElementById('cart_quantity').innerHTML==0)
+        {
+
+            document.getElementById('cart_quantity').className='badge badge-light';
+        }
+        else{
+
+            document.getElementById('cart_quantity').className='badge badge-danger';
+        }
         $.ajaxSetup({
                     headers: {
                               'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
