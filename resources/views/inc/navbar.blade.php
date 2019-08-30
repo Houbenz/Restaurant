@@ -17,7 +17,7 @@
               <!--Notification panel im testing here-->
             {{ Form::open(['action' => 'commandeController@store' ,'method' => 'post'])}}          
                     @csrf                  
-                            <a class="btn btn-light  text-white mr-3" href="/test">
+                            <a class="btn btn-light  text-white mr-3" href="/panier">
                              
                             <img src="{{asset('pictures/cart.svg')}}" alt="img" width="32" height="32">
                             <span id='cart_quantity' class="badge badge-light" style="margin-left:-4px">

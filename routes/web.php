@@ -35,6 +35,10 @@ Route::post('/updateprofile','ModifyUserController@modify');
 
 Route::get('/tr', 'PagesController@testRobvan');
 
+Route::get('/panier','PagesController@modifierPanier');
+
+Route::post('/removePlatFromPanier','PagesController@removePlatFromPanier');
+
 Route::resource('plats','platsController');
 
 Route::post('/sendAjax','platsController@addToCart');
