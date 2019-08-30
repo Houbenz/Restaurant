@@ -14,29 +14,25 @@
               @auth
 
               <!--Notification panel-->
-              <div class="btn btn-light  text-white mr-3">
-                    <img src="{{asset('pictures/cart.svg')}}" alt="img" width="32" height="32">
-              <span id='cart_quantity' class="badge badge-light" style="margin-left:-4px">
+              <!--Notification panel im testing here-->
+            {{ Form::open(['action' => 'commandeController@store' ,'method' => 'post'])}}          
+                    @csrf                  
+                            <a class="btn btn-light  text-white mr-3" href="/test">
+                             
+                            <img src="{{asset('pictures/cart.svg')}}" alt="img" width="32" height="32">
+                            <span id='cart_quantity' class="badge badge-light" style="margin-left:-4px">
 
-                @if (session('plats'))
-                {{count(session('plats'))}}
-             
-                @else
-                    0
-                @endif
-            </span>
-              </div>
-              <!--Notification panel im testing here
-            {{/* Form::open(['action' => 'commandeController@store' ,'method' => 'post']) */}}
-                
-                    @csrf
-                        <div class="btn btn-light  text-white mr-3">
-                        <img src="{{/*asset('pictures/cart.svg')*/}}" alt="img" width="32" height="32">
-                                <span id='cart_quantity' class="badge badge-light" style="margin-left:-4px">0</span>
-                        </div>
+                                @if (session('plats'))
+                                     {{count(session('plats'))}}  
+                                @else
+                                      0
+                                @endif
+                            </span>
+                        </a>
+                            
                         <input type="submit" value="submit">
-                    {{/*Form::close()*/}}
--->
+                    {{Form::close()}}
+
 
               <div class="dropdown">
                  <span style="cursor:pointer" class=" btn btn-grey nav-link drop-down dropdown-toggle text-white mr-5" data-toggle="dropdown">
