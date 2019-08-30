@@ -38,3 +38,9 @@ Route::get('/tr', 'PagesController@testRobvan');
 Route::resource('plats','platsController');
 
 Route::post('/sendAjax','platsController@addToCart');
+
+Route::get('/test',function(){
+
+    return view('commandes');
+
+});
