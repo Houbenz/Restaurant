@@ -13,11 +13,16 @@
             @if(Route::has('login'))
               @auth
 
-              <!--Notification panel-->
-              <div class="btn btn-light  text-white mr-3">
-                    <img src="{{asset('pictures/cart.svg')}}" alt="img" width="32" height="32">
-                    <span id='cart_quantity' class="badge badge-light" style="margin-left:-4px">0</span>
-              </div>
+              <!--Notification panel im testing here-->
+                {{ Form::open(['action' => 'commandeController@store' ,'method' => 'post']) }}
+                
+                    @csrf
+                        <div class="btn btn-light  text-white mr-3">
+                                <img src="{{asset('pictures/cart.svg')}}" alt="img" width="32" height="32">
+                                <span id='cart_quantity' class="badge badge-light" style="margin-left:-4px">0</span>
+                        </div>
+                        <input type="submit" value="submit">
+                {{Form::close()}}
 
               <div class="dropdown">
                  <span style="cursor:pointer" class=" btn btn-grey nav-link drop-down dropdown-toggle text-white mr-5" data-toggle="dropdown">
@@ -26,8 +31,11 @@
                      <a href="/plats" class="dropdown-item">Menus</a>
 
                  <a href="/user" class="dropdown-item">Profile</a>
-                 <a href="/tr" class="dropdown-item">Ajouter un plat</a>
-                 
+                @if (auth()->user()->type_client == 'responsable')
+                    <a href="/plats/create" class="dropdown-item">Ajouter un plat</a>
+                @endif     
+                <a href="/tr" class="dropdown-item">Ajouter un plat</a>
+
                      <form action="{{route('logout')}}" method="POST">
                             @csrf
                         <button type="submit" class=" dropdown-item text-danger ">Logout</button>
