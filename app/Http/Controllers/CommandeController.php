@@ -42,9 +42,15 @@ class CommandeController extends Controller
         $commande = new commande;
         $plats =session('plats');
 
-        $commande->etat = 'confirmer';
+        $commande->etat = 'lancer';
         $commande->id_client = auth()->user()->id;
-        $commande->type ='dehors';
+        if (auth()->user()->type_client == 'client_dehors') {
+            # code...
+            $commande->type ='dehors';
+        } else {
+            # code...
+            $commande->type ='interne';
+        }        
         $commande->save();
         $commande->plat()->attach($plats);
 

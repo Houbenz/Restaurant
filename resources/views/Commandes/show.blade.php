@@ -17,15 +17,15 @@
             @if (count($plats) > 0)
                 
             @foreach ($plats as $plat)
-        <div class="row p-4 mt-4 border align-items-center " style="height:200px;">
-                <div class="col-8">
-            
-                        <img src="{{asset('/storage/cover_images/'.$plat->cover_image)}}" alt="image" width="256"height="256" class="img-thumbnail pull-left mr-2" style="width:14rem;height:10rem;size:unset"">
-                        <h3>{{$plat->nom}}</h3>
-                        <p ><strong>Ingrédients :</strong>  {{$plat->ingrediants}}</p>
+                <div class="row p-4 mt-4 border align-items-center " style="height:200px;">
+                    <div class="col-8">
+                
+                            <img src="{{asset('/storage/cover_images/'.$plat->cover_image)}}" alt="image" width="256"height="256" class="img-thumbnail pull-left mr-2" style="width:14rem;height:10rem;size:unset"">
+                            <h3>{{$plat->nom}}</h3>
+                            <p ><strong>Ingrédients :</strong>  {{$plat->ingrediants}}</p>
                     </div>      
-            <div class="col-4"> <h5>Prix : {{$plat->prix}}.00DZD</h5> </div>
-            </div>
+                    <div class="col-4"> <h5>Prix : {{$plat->prix}}.00DZD</h5> </div>
+                </div>
             @endforeach
             
             @else

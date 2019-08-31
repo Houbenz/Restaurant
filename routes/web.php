@@ -25,7 +25,6 @@ Route::get('user',function(){
     return view('userprofile');
 });
 
-Route::get('/', 'PagesController@index');
 
 Auth::routes();
 
@@ -33,11 +32,22 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::post('/updateprofile','ModifyUserController@modify');
 
+//--------------------Pages controller-------------------
+
+Route::get('/', 'PagesController@index');
 Route::get('/tr', 'PagesController@testRobvan');
 
 Route::get('/panier','PagesController@modifierPanier');
 
+Route::get('/listeCommandes','pagesController@listeCommandes');
+
+Route::post('/annulerCommande','pagesController@annulerCommande');
+Route::post('/validerCommande','pagesController@validerCommande');
+
+
 Route::post('/removePlatFromPanier','PagesController@removePlatFromPanier');
+
+//-----------------------end pages controller-------------------------------
 
 Route::resource('plats','platsController');
 
@@ -49,3 +59,4 @@ Route::get('/test',function(){
 
 });
 Route::resource('commandes','commandeController');
+

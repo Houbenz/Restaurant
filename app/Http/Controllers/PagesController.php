@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use App\Plat;
+use App\Commande;
 
 class PagesController extends Controller
 {
@@ -53,6 +54,48 @@ class PagesController extends Controller
         $request->session()->put('plats', $platsList);
 
         return redirect('/panier');
+    }
+
+    public function listeCommandes()
+    {
+        $commandes = Commande::where([
+            ['etat', 'lancer'],
+            ['type', 'dehors'],
+        ])->get();
+        $totals=array();
+        $total=0;
+
+        foreach ($commandes as $commande) {
+            # code...
+            $plats = $commande->plat;
+            foreach ($plats as $plat) {
+                # code...
+                $total = $total + $plat->prix;
+            }
+            $totals = $totals + array($commande->id => $total);
+            $total=0;
+        }
+
+        return view('commandes.listeCommandes')->with('commandes',$commandes)
+                                                ->with('totals' , $totals);
+    }
+
+    public function annulerCommande(Request $request)
+    {   
+        $commande = Commande::find($request->input('commande'));
+        $commande->etat = 'annuler';
+        $commande->save();
+
+        return redirect('/listeCommandes');
+    }
+
+    public function validerCommande(Request $request)
+    {
+        $commande = Commande::find($request->input('commande'));
+        $commande->etat = 'valider';
+        $commande->save();
+
+        return redirect('/listeCommandes');   
     }
 
     public function testRobvan()

@@ -18,7 +18,7 @@
             @if (auth()->user()->type_client == 'responsable')
                 <a href="/plats/{{$plat->id}}/edit" class="btn btn-block card-btn btn-danger">Editer</a>
             @else
-                <button class="btn btn-block card-btn btn-success" onclick="addToCart('{{$plat->id}}','{{$plat->nom}}'">
+                <button class="btn btn-block card-btn btn-success" onclick="addToCart('{{$plat->id}}','{{$plat->nom}}')">
                     Ajouter au commande
                 </button>
             @endif

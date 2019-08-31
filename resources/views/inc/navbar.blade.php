@@ -14,26 +14,18 @@
               @auth
 
               <!--Notification panel-->
-              <!--Notification panel im testing here-->
-            {{ Form::open(['action' => 'commandeController@store' ,'method' => 'post'])}}          
-                    @csrf                  
-                            <a class="btn btn-light  text-white mr-3" href="/panier">
-                             
-                            <img src="{{asset('pictures/cart.svg')}}" alt="img" width="32" height="32">
-                            <span id='cart_quantity' class="badge badge-light" style="margin-left:-4px">
+                <a class="btn btn-light  text-white mr-3" href="/panier">
+                        
+                    <img src="{{asset('pictures/cart.svg')}}" alt="img" width="32" height="32">
+                    <span id='cart_quantity' class="badge badge-light" style="margin-left:-4px">
 
-                                @if (session('plats'))
-                                     {{count(session('plats'))}}  
-                                @else
-                                      0
-                                @endif
-                            </span>
-                        </a>
-                            
-                        <input type="submit" value="submit">
-                    {{Form::close()}}
-
-
+                        @if (session('plats'))
+                                {{count(session('plats'))}}  
+                        @else
+                                0
+                        @endif
+                    </span>
+                </a>
               <div class="dropdown">
                  <span style="cursor:pointer" class=" btn btn-grey nav-link drop-down dropdown-toggle text-white mr-5" data-toggle="dropdown">
                      <strong> {{Auth::user()->nom}} </strong></span>
@@ -42,11 +34,15 @@
 
                  <a href="/user" class="dropdown-item">Profile</a>    
                  <a href="/commandes" class="dropdown-item">Mes commandes</a>
-                 
+                
+                <!--test du type de clien pour afficher le bon drop menu juste pour ne pas oublier-->
                 @if (auth()->user()->type_client == 'responsable')
                     <a href="/plats/create" class="dropdown-item">Ajouter un plat</a>
+                    <a href="/listeCommandes" class="dropdown-item">Commandes a controller</a>
+
                 @endif     
                 <a href="/tr" class="dropdown-item">Ajouter un plat</a>
+                <a href="/listeCommandes" class="dropdown-item">Commandes a controller</a>
 
                      <form action="{{route('logout')}}" method="POST">
                             @csrf
