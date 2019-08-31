@@ -3,10 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Plat;
-use App\Commande;
 
-class CommandeController extends Controller
+class MessageController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,10 +13,7 @@ class CommandeController extends Controller
      */
     public function index()
     {
-
-        $commandes = Commande::where('id_client',auth()->user()->id)->get();
-      
-         return view('commandes.index')->with('commandes',$commandes);
+        return 'index';
     }
 
     /**
@@ -39,25 +34,29 @@ class CommandeController extends Controller
      */
     public function store(Request $request)
     {
-        $commande = new commande;
-        $plats =session('plats');
+        
 
-        $commande->etat = 'lancer';
-        $commande->id_client = auth()->user()->id;
-        if (auth()->user()->type_client == 'client_dehors') {
-            # code...
-            $commande->type ='dehors';
-        } else {
-            # code...
-            $commande->type ='interne';
-        }        
-        $commande->save();
-        $commande->plat()->attach($plats);
+        return response()->json(array('nom' => $request->input('nom')),200);
 
-        //to remove plats from session when an commande is done
-        $request->session()->forget('plats');
 
-        return redirect('/tr')->with('message','welldone');
+        $message = new Message;
+
+        if(!empty($request->input('nom')))
+        $message->nom=$request->input('nom');
+        
+        if(!empty($request->input('email')))
+        $message->email=$request->input('email');
+        
+        if(!empty($request->input('titre')))
+        $message->titre=$request->input('titre');
+        
+        if(!empty($request->input('contenu')))
+        $message->sujet=$request->input('contenu');
+
+        $message->save();
+
+        //return response()->json(array('msg' => 'message envoyé avec succès'),200);
+
     }
 
     /**
@@ -68,15 +67,7 @@ class CommandeController extends Controller
      */
     public function show($id)
     {
-        $plats= Commande::find($id)->plat;
-
-        $somme=0;
-
-        foreach($plats as $plat){
-            $somme += $plat->prix;
-        }
-
-        return view('commandes.show',['plats'=> $plats,'command_id' => $id,'somme' => $somme]);
+        //
     }
 
     /**
@@ -112,5 +103,4 @@ class CommandeController extends Controller
     {
         //
     }
-
 }

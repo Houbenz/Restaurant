@@ -35,7 +35,7 @@
             <div class="row p-2 d-flex mt-4">
                 <div class="col-3"></div>
                 <div class="col-6">
-                    <h3 class="text-center">Total : 1200.00DZD</h3>
+                    <h3 class="text-center">Total : {{$somme}}.00DZD</h3>
                 </div>
                 <div class="col-3"></div>
 

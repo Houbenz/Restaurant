@@ -21,16 +21,11 @@
                         {{session('message')}}
                 </div>
                 @endif
-                @if(count($plat) > 0)
-                <br>
-                <div class="alert alert-success">
-                       prix = {{$plat->prix}}
-                </div>
-                @endif
                 
             <br><br><br>
             {{ Form::open(['action' => ['platsController@update',$plat->id] ,'method' => 'post','enctype' => 'multipart/form-data']) }}
                 
+                    @method('PUT')
                 @csrf
                         <div class="form-group">
                             {{Form::label('nom','Nom Plat :')}}
@@ -43,8 +38,8 @@
                         </div>
 
                         <div class="form-group">
-                                {{Form::label('ingrediant','Ingrediants :')}}
-                                {{Form::text('ingrediant',$plat->ingrediants,['placeholder' => 'thon,fromage,viande,nutella','class' => 'form-control'])}}
+                                {{Form::label('ingrediants','Ingrediants :')}}
+                                {{Form::text('ingrediants',$plat->ingrediants,['placeholder' => 'thon,fromage,viande,nutella','class' => 'form-control'])}}
                         </div>
                         
                         <div class="form-group">
@@ -52,16 +47,12 @@
                                 {{Form::Number('prix',$plat->prix,['class' => 'form-control'])}}
                         </div>
                         <div class="form-group">
-                                {{Form::label('disp','disp :')}}
-                                @if ($plat->disponibilite > 0)
-                                    {{Form::text('disp','plat disponible',['class' => 'form-control'])}}
-                                @else
-                                    {{Form::text('disp','plat non disponible',['class' => 'form-control'])}}
-                                @endif
+                                {{Form::label('disponibilite','disponibilite :')}}
+                                {{Form::select('disponibilite',array(0 => 'Disponible',1 => 'Non disponible'),0,['class' => 'form-control'])}}
                         </div>
                         
                         <div class="form-group">
-                            {{Form::file('cover_image')}}
+                            {{Form::file('cover_image'),asset('/storage/cover_images'.$plat->cover_image)}}
                         </div>
 
                         {{Form::submit('Save post',['class' => 'offset-9 btn btn-lg btn-primary col-3'])}}

@@ -28,7 +28,8 @@ Route::get('user',function(){
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+//Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home','CommandeController@index')->name('home');
 
 Route::post('/updateprofile','ModifyUserController@modify');
 
@@ -60,3 +61,6 @@ Route::get('/test',function(){
 });
 Route::resource('commandes','commandeController');
 
+Route::resource('messages','MessageController');
+
+Route::post('/storeMessage','MessageController@store');

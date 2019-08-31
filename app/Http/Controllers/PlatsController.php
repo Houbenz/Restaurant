@@ -117,9 +117,9 @@ class PlatsController extends Controller
         $plat = plat::find($id);
         $user= user::find(auth()->user()->id);
         //check for user id
-        if($user->type_client !== 'responsable'){
-            return view('robvanTests.testR')->with('user',$user);
-        }
+       // if($user->type_client != 'responsable'){
+            //return view('robvanTests.testR')->with('user',$user);
+        //}
         return view('plats.edit')->with('plat',$plat)->with('user',$user);
     }
 
@@ -132,7 +132,29 @@ class PlatsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $plat = Plat::find($id);
+
+        if(!empty($request->input('nom')))
+        $plat->nom=$request->input('nom');
+
+        if(!empty($request->input('type')))
+        $plat->type=$request->input('type');
+
+        if(!empty($request->input('prix')))
+        $plat->prix=$request->input('prix');
+
+        if(!empty($request->input('ingrediants')))
+        $plat->ingrediants=$request->input('ingrediants');
+
+        if(!empty($request->input('disponibilite')))
+        $plat->disponibilite=$request->input('disponibilite');
+
+        if(!empty($request->input('cover_image')))
+        $plat->cover_image=$request->input('cover_image');
+
+        $plat->save();
+
+        return redirect('/home')->with('message','Plat mis à jour avec succès');
     }
 
     /**
