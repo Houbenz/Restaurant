@@ -52,7 +52,7 @@
                         </div>
                         
                         <div class="form-group">
-                            {{Form::file('cover_image'),asset('/storage/cover_images'.$plat->cover_image)}}
+                            {{Form::file('cover_image')}}
                         </div>
 
                         {{Form::submit('Save post',['class' => 'offset-9 btn btn-lg btn-primary col-3'])}}

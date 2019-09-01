@@ -117,7 +117,7 @@ class PlatsController extends Controller
         $plat = plat::find($id);
         $user= user::find(auth()->user()->id);
         //check for user id
-       // if($user->type_client != 'responsable'){
+       // if($user->type_client !== 'responsable'){
             //return view('robvanTests.testR')->with('user',$user);
         //}
         return view('plats.edit')->with('plat',$plat)->with('user',$user);
@@ -132,26 +132,37 @@ class PlatsController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this -> validate($request,[
+            'nom' => 'required',
+            'type' => 'required',
+            'prix'=> 'required|integer|between:10,1500',
+            'disponibilite' => 'required|in:0,1',
+            'ingrediants' => 'required',
+            'cover_image' => 'image|max:1999',
+        ]);
         $plat = Plat::find($id);
+        
+            //handle file upload
+        if($request -> hasFile('cover_image')){
+            //get filename with the extension
+            $fileNameWithExt = $request->file('cover_image')->getClientOriginalName();
+            //Get just filename
+            $filename = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
+            //get just ext
+            $extension = $request->file('cover_image')->getClientOriginalExtension();
+            //file name to store
+            $fileNameToStore = $filename.'_'.time().'.'.$extension;
+            //upload image
+             $request->file('cover_image')->storeAs('public/cover_images', $fileNameToStore);
+             //modifier la photo
+             $plat->cover_image=$fileNameToStore;          
+        }
 
-        if(!empty($request->input('nom')))
-        $plat->nom=$request->input('nom');
-
-        if(!empty($request->input('type')))
-        $plat->type=$request->input('type');
-
-        if(!empty($request->input('prix')))
-        $plat->prix=$request->input('prix');
-
-        if(!empty($request->input('ingrediants')))
-        $plat->ingrediants=$request->input('ingrediants');
-
-        if(!empty($request->input('disponibilite')))
-        $plat->disponibilite=$request->input('disponibilite');
-
-        if(!empty($request->input('cover_image')))
-        $plat->cover_image=$request->input('cover_image');
-
+        $plat->nom = $request->input('nom');
+        $plat->type = $request->input('type');
+        $plat->prix = $request->input('prix');
+        $plat->ingrediants = $request->input('ingrediants');
+        $plat->disponibilite = $request->input('disponibilite');
         $plat->save();
 
         return redirect('/home')->with('message','Plat mis à jour avec succès');
