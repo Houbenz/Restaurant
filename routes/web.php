@@ -42,9 +42,7 @@ Route::get('/panier','PagesController@modifierPanier');
 
 Route::get('/listeCommandes','pagesController@listeCommandes');
 
-Route::post('/annulerCommande','pagesController@annulerCommande');
-Route::post('/validerCommande','pagesController@validerCommande');
-
+Route::post('/etatCommande','pagesController@etatCommande');
 
 Route::post('/removePlatFromPanier','PagesController@removePlatFromPanier');
 

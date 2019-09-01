@@ -58,10 +58,21 @@ class PagesController extends Controller
 
     public function listeCommandes()
     {
-        $commandes = Commande::where([
-            ['etat', 'lancer'],
-            ['type', 'dehors'],
-        ])->get();
+        if (auth()->user()->type_client == 'responsable') {
+            # code...
+            $commandes = Commande::where([
+                ['etat', 'lancer'],
+                ['type', 'dehors'],
+            ])->get();
+        } else {
+            # code...
+            $commandes = Commande::where([
+                ['etat', 'lancer'],
+                ['type', 'interne'],
+                ])->orWhere('etat', 'valider')->get();
+        }
+        
+       
         $totals=array();
         $total=0;
 
@@ -75,26 +86,25 @@ class PagesController extends Controller
             $totals = $totals + array($commande->id => $total);
             $total=0;
         }
-
-        return view('commandes.listeCommandes')->with('commandes',$commandes)
-                                                ->with('totals' , $totals);
-    }
-
-    public function annulerCommande(Request $request)
-    {   
-        $commande = Commande::find($request->input('commande'));
-        $commande->etat = 'annuler';
-        $commande->save();
-
-        return redirect('/listeCommandes');
+            
+        if (auth()->user()->type_client == 'responsable') {
+            # code...
+            return view('commandes.listeCommandes')->with('commandes',$commandes)
+            ->with('totals' , $totals);
+        } else {
+            # code...
+            return view('commandes.listeCommandesCuisinier')->with('commandes',$commandes)
+            ->with('totals' , $totals);
+        }
+       
     }
 
     public function validerCommande(Request $request)
     {
         $commande = Commande::find($request->input('commande'));
-        $commande->etat = 'valider';
+        $commande->etat = $request->input('etat');
         $commande->save();
-
+        
         return redirect('/listeCommandes');   
     }
 

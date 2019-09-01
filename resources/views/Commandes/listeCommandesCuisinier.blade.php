@@ -24,35 +24,32 @@
                 <table class="table table-striped">
                     <tr>
                             <th>Num</th>
-                            <th>Nom du client</th>
-                            <th>Num tel</th>
+                            <th>Table</th>
                             <th>Total</th>
-                            <th>Valider</th>
-                            <th>Annuler</th>
+                            <th>Action</th>
                     </tr>
                     @foreach ($commandes as $commande)
                         <tr>
                             <td>{{$commande->id}}</td>
                             <td>{{$commande->client->nom}}</td>
-                            <td>{{$commande->client->num_tel}}</td>
                             <td>{{$totals[$commande->id]}}.00 DZD</td>
                             <td>
-                                {{ Form::open(['url' => '/etatCommande' ,'method' => 'post']) }}
-    
-                                    @csrf
-                                    {{Form::hidden('commande',$commande->id)}}
-                                    {{Form::hidden('etat','valider')}}
-                                    {{Form::submit('Valider',['class' => 'btn btn-info'])}}
-                                {{ Form::close() }}
-                            </td>
-                            <td>    
-                                {{ Form::open(['url' => '/etatCommande' ,'method' => 'post']) }}
-                                    @csrf
-                                    {{Form::hidden('commande',$commande->id)}}
-                                    {{Form::hidden('etat','annuler')}}
-                                    {{Form::submit('Annuler',['class' => 'btn btn-warning'])}}
-                                {{ Form::close() }}
-                            </td>          
+                                @if ($commande->etat == 'lancer')
+                                    {{ Form::open(['url' => '/etatCommande' ,'method' => 'post']) }}
+                                        @csrf
+                                        {{Form::hidden('commande',$commande->id)}}
+                                        {{Form::hidden('etat','valider')}}
+                                        {{Form::submit('Valider',['class' => 'btn btn-info col-12'])}}
+                                    {{ Form::close() }}
+                                @else
+                                    {{ Form::open(['url' => '/etatCommande' ,'method' => 'post']) }}
+                                        @csrf
+                                        {{Form::hidden('commande',$commande->id)}}
+                                        {{Form::hidden('etat','prete')}}
+                                        {{Form::submit('Commande prete',['class' => 'btn btn-warning col-12'])}}
+                                    {{ Form::close() }}
+                                @endif
+                            </td>      
                         </tr>                  
                     @endforeach
                 </table>
