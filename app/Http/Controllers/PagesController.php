@@ -99,7 +99,7 @@ class PagesController extends Controller
        
     }
 
-    public function validerCommande(Request $request)
+    public function etatCommande(Request $request)
     {
         $commande = Commande::find($request->input('commande'));
         $commande->etat = $request->input('etat');
