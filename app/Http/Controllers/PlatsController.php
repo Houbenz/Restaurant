@@ -165,7 +165,7 @@ class PlatsController extends Controller
         $plat->disponibilite = $request->input('disponibilite');
         $plat->save();
 
-        return redirect('/home')->with('message','Plat mis à jour avec succès');
+        return redirect('/plats')->with('message','Plat mis à jour avec succès');
     }
 
     /**

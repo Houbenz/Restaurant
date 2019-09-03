@@ -46,6 +46,7 @@ class PagesController extends Controller
             if(($plat == $id)&&(!$count))
             {
                 $count = true;
+                $platSuprime = Plat::find($plat);
             }else{
                 $platsList[$i] = $plat;
                 $i++;
@@ -53,7 +54,7 @@ class PagesController extends Controller
         }
         $request->session()->put('plats', $platsList);
 
-        return redirect('/panier');
+        return redirect('/panier')->with('message','Plat "'.$platSuprime->nom.'" enlevée avec succes');;
     }
 
     public function listeCommandes()
@@ -105,7 +106,7 @@ class PagesController extends Controller
         $commande->etat = $request->input('etat');
         $commande->save();
         
-        return redirect('/listeCommandes');   
+        return redirect('/listeCommandes')->with('message','la commande est : '.$commande->etat);;   
     }
 
     public function testRobvan()
