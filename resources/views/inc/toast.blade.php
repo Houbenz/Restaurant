@@ -21,7 +21,7 @@
          <div class="toast fade show" role="alert" aria-live="polite" aria-atomic="true" data-delay="5000">
              <div class="toast-header">
                  <strong class="mr-auto"><i class="fa fa-globe"></i>Message</strong>
-                 <small class="text-muted">just now</small>
+                 <small class="text-muted">juste maintenant</small>
                  <button type="button" class="ml-2 mb-1 close" data-dismiss="toast">&times;</button>
              </div>
              <div class="toast-body">

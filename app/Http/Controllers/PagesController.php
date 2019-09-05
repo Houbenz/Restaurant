@@ -114,4 +114,9 @@ class PagesController extends Controller
         $user = User::Find(auth()->user()->id);
         return view('robvanTests.testR')->with('user',$user);
     }
+
+    public function loginAdminRoute(){
+
+        return view('admins.login');
+    }
 }
