@@ -9,6 +9,17 @@ use App\Commande;
 
 class PagesController extends Controller
 {
+    
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth' ,['except' => ['index' , 'modifierPanier','removePlatFromPanier']]);
+    }
+
     public function index(){
         $plats =  Plat::paginate(3);
         return view('start')->with('plats',$plats);
@@ -66,11 +77,16 @@ class PagesController extends Controller
                 ['type', 'dehors'],
             ])->get();
         } else {
-            # code...
-            $commandes = Commande::where([
-                ['etat', 'lancer'],
-                ['type', 'interne'],
-                ])->orWhere('etat', 'valider')->get();
+            if (auth()->user()->type_client == 'chef_cuisinier') {
+                # code...
+                $commandes = Commande::where([
+                    ['etat', 'lancer'],
+                    ['type', 'interne'],
+                    ])->orWhere('etat', 'valider')->get();
+            }else {
+                # code...
+                return redirect('/plats')->with('message','    that page is forbiden   ');
+            }
         }
         
        
@@ -104,14 +120,14 @@ class PagesController extends Controller
     {
         $commande = Commande::find($request->input('commande'));
         $commande->etat = $request->input('etat');
+        if($commande->etat == 'valider' || $commande->etat =='annuler' ){
+            $commande->valideur = auth()->user()->id;
+        }
+        if($commande->etat == 'servi'){
+            $commande->serveur = auth()->user()->id;
+        }
         $commande->save();
         
         return redirect('/listeCommandes')->with('message','la commande est : '.$commande->etat);;   
-    }
-
-    public function testRobvan()
-    {
-        $user = User::Find(auth()->user()->id);
-        return view('robvanTests.testR')->with('user',$user);
     }
 }

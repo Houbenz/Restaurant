@@ -19,8 +19,14 @@
                     <div class="card__content">
                         <div class="card__title text-center" ><a href="/plats/{{$plat->id}}" class="custom-card">{{$plat->nom}}</a></div>
                         <p class="card__text">{{$plat->ingrediants}} </p>
-                        @if (auth()->user()->type_client == 'responsable')
-                            <a href="/plats/{{$plat->id}}/edit" class="btn btn-block card-btn btn-danger">Editer</a>
+                        @if(auth()->check())
+                            @if (auth()->user()->type_client == 'responsable')
+                                <a href="/plats/{{$plat->id}}/edit" class="btn btn-block card-btn btn-danger">Editer</a>
+                            @else
+                                <button class="btn btn-block card-btn btn-success" onclick="addToCart('{{$plat->id}}','{{$plat->nom}}')">
+                                    Ajouter au commande
+                                </button>
+                            @endif
                         @else
                             <button class="btn btn-block card-btn btn-success" onclick="addToCart('{{$plat->id}}','{{$plat->nom}}')">
                                 Ajouter au commande

@@ -8,6 +8,10 @@ use App\Commande;
 
 class CommandeController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -57,7 +61,7 @@ class CommandeController extends Controller
         //to remove plats from session when an commande is done
         $request->session()->forget('plats');
 
-        return redirect('/commande')->with('message','welldone');
+        return redirect('/commandes')->with('message','Votre commande est lancer avec succes');
     }
 
     /**
