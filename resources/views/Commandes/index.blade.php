@@ -4,16 +4,7 @@
 
 
 <div class="container border p-5 text-center">
-        <h3 class="pb-5">Vos commandes</h3>
-
-        @if(session('message'))
-        <div class="alert alert-success text-center fade show alert-dismissible">{{session('message')}}
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-        @endif
-        
+    <h3 class="pb-5">Vos commandes</h3>        
     <div class="row text-center d-flex justify-content-center align-items-center">
 
 

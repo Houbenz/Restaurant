@@ -8,6 +8,18 @@ use App\user;
 
 class PlatsController extends Controller
 {
+
+
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth' ,['except' => ['index' , 'show','addToCart']]);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -74,14 +86,13 @@ class PlatsController extends Controller
 
         $plat->nom = $request->input('nom');
         $plat->type = $request->input('type');
-        //$plat->user_id = auth()->user()->id;
         $plat->prix = $request->input('prix');
         $plat->ingrediants = $request->input('ingrediant');
         $plat->disponibilite = $request->input('disp');
         $plat->cover_image=$fileNameToStore;
         $plat->save();
 
-        return redirect('/tr')->with('message','plat sauvgardé avec succés');
+        return redirect('/plats')->with('message','plat sauvgardé avec succés');
 
     }
 
@@ -117,9 +128,9 @@ class PlatsController extends Controller
         $plat = plat::find($id);
         $user= user::find(auth()->user()->id);
         //check for user id
-       // if($user->type_client !== 'responsable'){
-            //return view('robvanTests.testR')->with('user',$user);
-        //}
+        if($user->type_client !== 'responsable'){
+            return view('/plats')->with('message','forbidden');
+        }
         return view('plats.edit')->with('plat',$plat)->with('user',$user);
     }
 
