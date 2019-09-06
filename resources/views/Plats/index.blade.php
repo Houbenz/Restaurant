@@ -1,44 +1,83 @@
-    @extends('layouts.app')
+@extends('layouts.app')
 
-    @section('content')
+@section('content')
         
-    <div class="container pt-5">
-
-        <h3 class="text-center display-3 mb-5">Tout les plâts !</h3>
-    @if (count($plats) > 0)
-                
-    <ul class="cards">
-        @foreach ($plats as $plat) 
-            <li class="cards__item">
-                <div class="card" style="width:18rem;height:22rem">
-                <a href="/plats/{{$plat->id}}" class="custom-card">
-                        <div class=" cover card__image card__image--fence" style="background-image:url('storage/cover_images/{{$plat->cover_image}}')">
+    <div class="container">
+        <div id="accordion">
+            <div class="card">
+                <div class="card-header text-center">
+                    <h5 class="card-link" data-toggle="collapse" href="#collapseOne">
+                        Recherche Menu
+                    </h5>
+                </div>
+                <div id="collapseOne" class="collapse" data-parent="#accordion">
+                    <div class="card-body">
+                        <div class="row col-12">
+                            <form class="form-inline col-12" action="/recherchePlats" method="get" id="recherchePlats" >
+                                <div class="form-group col-5">
+                                    <label for="type">Type: </label>
+                                    <select class="form-control offset-1 col-5" name="type" id="type">
+                                        <option value="%">Tout les repas</option>
+                                        <option value="pizza">Nos Pizzas</option>
+                                        <option value="sandwich">Nos Sandwichs</option>
+                                        <option value="plat">Nos Plats</option>
+                                        <option value="boisson">Nos Boisson</option>
+                                    </select>
+                                </div>                            
+                                <div class="form-group col-5">
+                                        <label for="prix">Prix: </label>
+                                        <input type="number" class="form-control offset-1 col-5" name="prix" id="prix" aria-describedby="helpId" placeholder="">
+                                        <small id="helpId" class="form-text text-muted offset-1"> prix < à</small>
+                                </div>
+                                <button type="submit" class="btn btn-primary col-2">Submit</button>
+                            </form>
                         </div>
-                </a>
-
-                    <div class="card__content">
-                        <div class="card__title text-center" ><a href="/plats/{{$plat->id}}" class="custom-card">{{$plat->nom}}</a></div>
-                        <p class="card__text">{{$plat->ingrediants}} </p>
-                        @if(auth()->check())
-                            @if (auth()->user()->type_client == 'responsable')
-                                <a href="/plats/{{$plat->id}}/edit" class="btn btn-block card-btn btn-danger">Editer</a>
-                            @else
-                                <button class="btn btn-block card-btn btn-success" onclick="addToCart('{{$plat->id}}','{{$plat->nom}}')">
-                                    Ajouter au commande
-                                </button>
-                            @endif
-                        @else
-                            <button class="btn btn-block card-btn btn-success" onclick="addToCart('{{$plat->id}}','{{$plat->nom}}')">
-                                Ajouter au commande
-                            </button>
-                        @endif                    
+                        <div class="row col-12" id="resultat">
+                            
+                        </div>
                     </div>
                 </div>
+            </div>
+            <div class="card">
+                    <div class="card-header text-center">
+                        <h5>
+                            <a class="collapsed card-link" data-toggle="collapse" href="#collapseTwo">
+                                    Tout les plâts !
+                            </a>
+                        </h5>
+                    </div>
+                    <div id="collapseTwo" class="collapse show" data-parent="#accordion">
+                        <div class="card-body">
+                            @include('inc.platsCards')
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </div>
+    <style>
+        .card-link{
+            cursor: pointer;
+            color: #696969;
+        }
+        .card-link:hover{
+            color: black
+        }    
+    </style>
+    <script>
+        $("#recherchePlats").submit(function(event){
+            event.preventDefault(); //prevent default action 
+            var post_url = $(this).attr("action"); //get form action url
+            var request_method = $(this).attr("method"); //get form GET/POST method
+            var form_data = $(this).serialize(); //Encode form elements for submission
             
-            </li>   
-            @endforeach
-    @endif
-</ul>
-</div>
+            $.ajax({
+                url : post_url,
+                type: request_method,
+                data : form_data
+            }).done(function(response){ //
+                $("#resultat").html(response);
+            });
+        });
+    </script>
 @endsection
 

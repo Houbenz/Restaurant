@@ -1,71 +1,81 @@
 @extends('layouts.app')
 
 @section('content')
-        <div class='jumbotron text-center col-8 offset-2'>
-                        <h3 class="text-center">Ajouter un plat</h3>
-            name : {{Auth::user()->nom}}
-            <br>
-            num tel: {{Auth::user()->num_tel}}
-            <br>
-            type : {{$user->type_client}}
-            <br>
-                 @if(count($errors) > 0)
-            
-                    @foreach ($errors as $error)
-                        <div class="alert alert-danger">
-                            {{$errors}}
+    <div class="container">
+        <div id="accordion">
+            <div class="card">
+                <div class="card-header text-center">
+                    <h5 class="card-link" data-toggle="collapse" href="#collapseOne">
+                        Recherche Menu
+                    </h5>
+                </div>
+                <div id="collapseOne" class="collapse" data-parent="#accordion">
+                    <div class="card-body">
+                        <div class="row col-12">
+                            <form class="form-inline col-12" action="/recherchePlats" method="get" id="recherchePlats" >
+                                <div class="form-group col-5">
+                                    <label for="type">Type: </label>
+                                    <select class="form-control offset-1 col-5" name="type" id="type">
+                                        <option value="%">Tout les repas</option>
+                                        <option value="pizza">Nos Pizzas</option>
+                                        <option value="sandwich">Nos Sandwichs</option>
+                                        <option value="plat">Nos Plats</option>
+                                        <option value="boisson">Nos Boisson</option>
+                                    </select>
+                                </div>                            
+                                <div class="form-group col-5">
+                                        <label for="prix">Prix: </label>
+                                        <input type="number" class="form-control offset-1 col-5" name="prix" id="prix" aria-describedby="helpId" placeholder="">
+                                        <small id="helpId" class="form-text text-muted offset-1"> prix < à</small>
+                                </div>
+                                <button type="submit" class="btn btn-primary col-2">Submit</button>
+                            </form>
                         </div>
-                        <br><br>
-                    @endforeach
-                @endif
-                @if(session('message'))
-                    <div class="alert alert-success">
-                            {{session('message')}}
+                        <div class="row col-12" id="resultat">
+                            
+                        </div>
                     </div>
-                    <br><br>
-                @endif
-                
-            {{ Form::open(['action' => 'platsController@store' ,'method' => 'post','enctype' => 'multipart/form-data']) }}
-                
-                @csrf
-                    <div class="form-group">
-                        {{Form::label('nom','Nom du plat :')}}
-                        {{Form::text('nom','',['placeholder' => 'Nom du plat','class' => 'form-control'])}}
+                </div>
+            </div>
+            <div class="card">
+                    <div class="card-header text-center">
+                        <h5>
+                            <a class="collapsed card-link" data-toggle="collapse" href="#collapseTwo">
+                                    Tout les plâts !
+                            </a>
+                        </h5>
                     </div>
-
-                    <div class="form-group">
-                        {{Form::label('type','type :')}}
-                        <select name='type' class="mdb-select md-form colorful-select dropdown-primary form-control">
-                                <option value="pizza">Pizza</option>
-                                <option value="sandwich">Sandwich</option>
-                                <option value="plat">Plat</option>
-                                <option value="boisson">Boisson</option>
-                                <option value="dessert">Dessert</option>
-                        </select>
+                    <div id="collapseTwo" class="collapse show" data-parent="#accordion">
+                        <div class="card-body">
+                            @include('inc.platsCards')
+                        </div>
                     </div>
-
-                    <div class="form-group">
-                        {{Form::label('ingrediant','Ingrediants :')}}
-                        {{Form::text('ingrediant','',['placeholder' => 'thon,fromage,viande,nutella','class' => 'form-control'])}}
-                    </div>
-                
-                    <div class="form-group">
-                        {{Form::label('prix','Prix :')}}
-                        {{Form::Number('prix','',['class' => 'form-control'])}}
-                    </div>
-                    <div class="form-group">
-                        {{Form::label('disp','Disponibilité du plat :')}}
-                        <select name='disp' class="mdb-select md-form colorful-select dropdown-primary form-control">
-                                <option value="0">Disponible</option>
-                                <option value="1">Non disponible</option>
-                        </select>
-                    </div>
-                
-                    <div class="form-group">
-                        {{Form::file('cover_image')}}
-                    </div>
-
-                {{Form::submit('Ajouter Plat',['class' => 'offset-9 btn btn-lg btn-primary col-3'])}}
-            {{ Form::close() }}
+            </div>
         </div>
+    </div>
+    <style>
+        .card-link{
+            cursor: pointer;
+            color: #696969;
+        }
+        .card-link:hover{
+            color: black
+        }    
+    </style>
+    <script>
+        $("#recherchePlats").submit(function(event){
+            event.preventDefault(); //prevent default action 
+            var post_url = $(this).attr("action"); //get form action url
+            var request_method = $(this).attr("method"); //get form GET/POST method
+            var form_data = $(this).serialize(); //Encode form elements for submission
+            
+            $.ajax({
+                url : post_url,
+                type: request_method,
+                data : form_data
+            }).done(function(response){ //
+                $("#resultat").html(response);
+            });
+        });
+    </script>
 @endsection

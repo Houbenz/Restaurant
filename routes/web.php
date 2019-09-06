@@ -33,6 +33,9 @@ Route::get('/home','CommandeController@index')->name('home');
 
 Route::post('/updateprofile','ModifyUserController@modify');
 
+Route::get('/recherchePlats','PagesController@recherchePlats');
+
+
 //--------------------Pages controller-------------------
 
 Route::get('/', 'PagesController@index');

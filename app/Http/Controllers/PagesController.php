@@ -7,6 +7,8 @@ use App\User;
 use App\Plat;
 use App\Commande;
 
+use function PHPSTORM_META\type;
+
 class PagesController extends Controller
 {
     
@@ -24,8 +26,10 @@ class PagesController extends Controller
         $plats =  Plat::paginate(3);
         return view('start')->with('plats',$plats);
     }
-
-    
+    public function testRobvan(){
+        $plats =  Plat::paginate(3);
+        return view('robvanTests.testR')->with('plats',$plats);
+    }
     //methode permet de consulter et modifier le panier
     public function modifierPanier(){
         $listePlats = session('plats');
@@ -136,6 +140,25 @@ class PagesController extends Controller
         
         return redirect('/listeCommandes')->with('message','la commande est : '.$commande->etat);;   
     }
+
+public function recherchePlats(Request $request){
+    $prix = $request->input('prix');
+    $type = $request->input('type');
+
+    if($prix==0){
+        $prix=5000;
+    }
+    if($type == '%'){
+        $plats = Plat::where([['prix','<=',$prix],])->get();
+    }else{
+        $plats = Plat::where([
+            ['type', $type],
+            ['prix','<=',$prix]
+        ])->get();
+    }
+    $view = view("inc.platsCards",['plats' => $plats]);
+    return $view;
+}
 public function loginAdminRoute(){
 
     return view('admins.login');
