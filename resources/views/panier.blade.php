@@ -35,14 +35,25 @@
                     <button class="btn btn-danger btn-more pull-right"> 
                     <img src="{{asset('/pictures/trash.svg')}}" alt="trash" width="32" height="32">
                     </button>
+
+                    <!-- this is the input we send to make command  -->
                  {{Form::hidden('plat',$plat->id)}}
+
                  {{ Form::close() }}
         
         </div>
     </div>
-
     @endforeach
 
+    @if ($somme)
+    <div class="row d-flex justify-content-center p-4 ">
+        <div class="col-3"></div>
+        <div class="col-6 text-center text-uppercase"><h4 class="display-4"> Totatl : {{$somme}}.00DZD </h4></div>
+        <div class="col-3"></div>
+    </div>  
+    @endif
+
+    
     {{ Form::open(['action' => 'commandeController@store' ,'method' => 'post']) }}
     
     @csrf    

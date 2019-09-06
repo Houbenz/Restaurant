@@ -24,7 +24,15 @@
 
 
     @include('inc.navbar')
+<!-- for the admin panel -->
+    @auth
+        @if (auth()->user()->type_client== 'admin')
+            
+        @include('inc.navAdmin')
 
+        @endif
+    @endauth
+<!--  --> 
     <main class="py-5 mt-3">
             @include('inc.toast')
 

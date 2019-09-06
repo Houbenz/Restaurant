@@ -5,13 +5,17 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Admin;
 use App\User;
-use Validator;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
 
 class AdminController extends Controller
 {
     //
 
+    public function __construct()
+    {
+        $this->middleware('admin');
+    }
 
     public function loginAdmin(Request $request){
 
@@ -27,33 +31,31 @@ class AdminController extends Controller
 
     public function registerUser(Request $request){
 
-        $validator = Validator::make($request->all(),
-        [
-            'nom' => ['required','string'],
+        $request->validate([
+            'nom' => ['required' ,'string','alpha'],
             'email'=>['required','string'],
             'password'=> ['required','confirmed'],
-            'password_confirmation' => 'required',
+            'password_confirmation' => ['required','min:8'],
             'type_client'=>'required',
-             'num_Tel' => ['required','numeric'],
+             'num_tel' => ['required','numeric'],
         ]);
 
-        if($validator->fails()){
-            return Redirect::to('/register_user')->withErrors($validator);
-        }
-        else{
 
-            User::create([
-                'nom' => $request->input('nom'),
-                'email' => $request->input('email'),
-                'password' => Hash::make($request->input('password')),
-                'adresse'=>$request->input('adresse'),
-                'num_tel'=> $request->input('num_tel'),
-                'type_client'=>$request->input('type_client'),
-            ]);
+            $user = new User;    
 
-            return Redirect::to('/register_user')->with('message','Utilisateur ajouté avec succès');
+            $user->nom = $request->input('nom');
+            $user->email = $request->input('email');
+            $user->password = Hash::make($request->input('password'));
+            $user->adresse=$request->input('adresse');
+            $user->num_tel= $request->input('num_tel');
+            $user->type_client=$request->input('type_client');
+            
+            $user->save();
+
+            return Redirect::to('/register_user')->with('status','Utilisateur ajouté avec succès');
+
         }
-    }
+    
 
 
 

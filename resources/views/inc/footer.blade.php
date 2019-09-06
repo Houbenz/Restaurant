@@ -62,6 +62,7 @@
                                 <li>restaurant@gmail.com</li><br>
                                 <li>+213 031807737</li><br>
                                 <li>+213 0794511326</li>
+                                <li><a href="/admin_login">S'authentifier en tantqu'administrateur</a></li>
                             </ul>
                     </div>
                     

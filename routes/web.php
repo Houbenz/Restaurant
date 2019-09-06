@@ -64,11 +64,6 @@ Route::resource('messages','MessageController');
 Route::post('/storeMessage','MessageController@store');
 
 // admin routes 
-
-Route::get('/admin_login','PagesController@loginAdminRoute');
-
-Route::post('/loginAdmin','AdminController@loginAdmin');
-
 Route::get('/adminHome','AdminController@adminHome');
 
 Route::get('/register_user','AdminController@registerUserRoute');

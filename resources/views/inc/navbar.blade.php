@@ -6,22 +6,35 @@
 
         <div class="navbar-nav mr-auto">
         <a href="{{route('home')}}" class="nav-item nav-link h5 text-white active">Home</a>
-            <a href="/plats" class="nav-item nav-link h5 text-white">Menu</a>
+
+        
+        @auth
+            @if (auth()->user()->type_client =="client_interne" || auth()->user()->type_client =="client_dehors" )
+                <a href="/plats" class="nav-item nav-link h5 text-white">Menu</a>
+             @endif
+
+         @endauth
+         
         </div>
         <div class="navbar-nav ml-auto">
-            <!--Notification panel-->
-            <a class="btn btn-light  text-white mr-3" href="/panier">
-                        
-                <img src="{{asset('pictures/cart.svg')}}" alt="img" width="32" height="32">
-                <span id='cart_quantity' class="badge badge-light" style="margin-left:-4px">
 
-                    @if (session('plats'))
-                            {{count(session('plats'))}}  
-                    @else
-                            0
-                    @endif
-                </span>
-            </a>
+            @if (auth()->check())           
+                <!--Notification panel-->
+                <a class="btn btn-light  text-white mr-3" href="/panier">
+                            
+                    <img src="{{asset('pictures/cart.svg')}}" alt="img" width="32" height="32">
+                    <span id='cart_quantity' class="badge badge-light" style="margin-left:-4px">
+
+                        @if (session('plats'))
+                                {{count(session('plats'))}}  
+                        @else
+                                0
+                        @endif
+                    </span>
+                </a>
+            @endif
+
+
             @if(Route::has('login'))
               @auth
 
@@ -30,6 +43,7 @@
                      <strong> {{Auth::user()->nom}} </strong></span>
                  <div class="dropdown-menu">
 
+                       
                  <a href="/user" class="dropdown-item">Profile</a>    
                  <a href="/commandes" class="dropdown-item">Mes commandes</a>
                 

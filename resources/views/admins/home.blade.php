@@ -2,9 +2,6 @@
 
 
 @section('content')
-    
-
-
 <div class="d-flex" id="wrapper">
 
         <!-- Sidebar -->
@@ -32,49 +29,21 @@
             </button>
     
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-              <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
-                <li class="nav-item active">
-                  <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#">Link</a>
-                </li>
-                <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Dropdown
-                  </a>
-                  <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Another action</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Something else here</a>
-                  </div>
-                </li>
-              </ul>
+
             </div>
           </nav>
     
           <div class="container-fluid text-center mt-4">
-                @if($name)
-                <h3> Bonjour {{$name}} </h3>
+                @if(auth()->user())
+                <h3> Bonjour {{auth()->user()->nom}} </h3>
                 @endif
+                
+                 @yield('admin-content')
               </div>
         </div>
         <!-- /#page-content-wrapper -->
     
       </div>
 
-<div class="container-fluid p-5">
 
-    <div class="row text-center d-flex justify-content-center">
-        <div class="col-3">  
-        </div>
-        <div class="col-6">
-
-      
-
-        </div>
-        <div class="col-3"></div>
-    </div>
-</div>
 @endsection

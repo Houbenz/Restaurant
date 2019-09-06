@@ -61,7 +61,7 @@ class CommandeController extends Controller
         //to remove plats from session when an commande is done
         $request->session()->forget('plats');
 
-        return redirect('/commandes')->with('message','Votre commande est lancer avec succes');
+        return redirect('/commandes')->with('message','Votre commande est lancé avec succès');
     }
 
     /**

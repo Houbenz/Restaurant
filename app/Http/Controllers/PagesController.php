@@ -32,6 +32,7 @@ class PagesController extends Controller
 
         
         $plats=array();
+        $somme=0;
 
         if($listePlats){
         for ($i=0; $i <count($listePlats) ; $i++) { 
@@ -40,8 +41,13 @@ class PagesController extends Controller
 
             array_push($plats,$plat);
         }
+
+        foreach($plats as $plat){
+            $somme += $plat->prix;
+        }
+
     }
-        return view('panier')->with('plats',$plats);
+        return view('panier')->with(['plats' => $plats,'somme' => $somme]);
 
     }
 
