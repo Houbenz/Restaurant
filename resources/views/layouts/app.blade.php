@@ -24,15 +24,7 @@
 
 
     @include('inc.navbar')
-<!-- for the admin panel -->
-    @auth
-        @if (auth()->user()->type_client== 'admin')
-            
-        @include('inc.navAdmin')
-
-        @endif
-    @endauth
-<!--  --> 
+    
     <main class="py-5 mt-3">
             @include('inc.toast')
 
@@ -49,6 +41,7 @@
 <script src="{{ asset('js/cards.js')}}"></script>
 <script src="{{ asset('js/toast.js')}}"></script>
 <script src="{{asset('js/sendAjax.js')}}"></script>
+<script src="{{asset('js/all_users.js')}}"></script>
 <script>
 $('.carousel').carousel({
     interval :2000,

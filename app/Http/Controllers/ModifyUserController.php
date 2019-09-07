@@ -24,6 +24,6 @@ class ModifyUserController extends Controller
                 'num_tel'=>$request->input('num_tel'),
                     ]);
 
-        return redirect('/home')->with('success','profile updated succesfully');
+        return redirect('/home')->with('success','profile mis à jour avec succès');
     }
 }

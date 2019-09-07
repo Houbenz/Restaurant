@@ -7,6 +7,7 @@ use App\Admin;
 use App\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\DB;
 
 class AdminController extends Controller
 {
@@ -55,9 +56,40 @@ class AdminController extends Controller
             return Redirect::to('/register_user')->with('status','Utilisateur ajouté avec succès');
 
         }
+
+        public  function modify(Request $request) {
+
+            $id=$request->input('id');
+
+            DB::table('users')
+            ->where('id',$request->input('id'))
+                ->update([
+                    'email' => $request->input('email'.$id),
+                    'nom'=>$request->input('nom'.$id),
+                    'adresse'=>$request->input('adresse'.$id),
+                    'num_tel'=>$request->input('num_tel'.$id),
+                        ]);
     
+            return redirect('/all_users')->with('success','profile mis à jour avec succès');
+        }
 
 
+        public function bloqueUser(Request $request)
+        {
+            DB::table('users')
+            ->where('id',$request->input('id'))
+                ->update([
+                    //do the blocking here
+                        ]);
+        }
+
+    
+    public function getUsers()
+    {
+        $users = User::all();
+
+        return view('admins.all_users')->with('users',$users);
+    }
 
     public function adminHome(){
         return view('admins.home');
@@ -67,4 +99,5 @@ class AdminController extends Controller
         
         return view('admins.registerUser');
     }
+
 }
