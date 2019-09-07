@@ -14,9 +14,9 @@
                     <div class="card-body">
                         <div class="row col-12">
                             <form class="form-inline col-12" action="/recherchePlats" method="get" id="recherchePlats" >
-                                <div class="form-group col-5">
+                                <div class="form-group col-12 col-md-5 text-center">
                                     <label for="type">Type: </label>
-                                    <select class="form-control offset-1 col-5" name="type" id="type">
+                                    <select class="form-control offset-1 col-12 col-md-5" name="type" id="type">
                                         <option value="%">Tout les repas</option>
                                         <option value="pizza">Nos Pizzas</option>
                                         <option value="sandwich">Nos Sandwichs</option>
@@ -24,12 +24,12 @@
                                         <option value="boisson">Nos Boisson</option>
                                     </select>
                                 </div>                            
-                                <div class="form-group col-5">
+                                <div class="form-group col-md-5 col-12 text-center">
                                         <label for="prix">Prix: </label>
-                                        <input type="number" class="form-control offset-1 col-5" name="prix" id="prix" aria-describedby="helpId" placeholder="">
+                                        <input type="number" class="form-control offset-1 col-12 col-md-5" name="prix" id="prix" aria-describedby="helpId" placeholder="">
                                         <small id="helpId" class="form-text text-muted offset-1"> prix < à</small>
                                 </div>
-                                <button type="submit" class="btn btn-primary col-2">Submit</button>
+                                <button type="submit" class="btn btn-primary offset-1 offset-md-0 col-md-2 col-12">Submit</button>
                             </form>
                         </div>
                         <div class="row col-12" id="resultat">

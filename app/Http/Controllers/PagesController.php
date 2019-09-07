@@ -7,11 +7,8 @@ use App\User;
 use App\Plat;
 use App\Commande;
 
-use function PHPSTORM_META\type;
-
 class PagesController extends Controller
-{
-    
+{    
     /**
      * Create a new controller instance.
      *
@@ -19,7 +16,7 @@ class PagesController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth' ,['except' => ['index' , 'modifierPanier','removePlatFromPanier']]);
+        $this->middleware('auth' ,['except' => ['index' , 'modifierPanier','removePlatFromPanier','recherchePlats']]);
     }
 
     public function index(){

@@ -5,18 +5,14 @@
         <span class="text-warning">RESTA</span><span class="text-primary">URANT</span> </span> 
 
         <div class="navbar-nav mr-auto">
-        
+            <a href="/plats" class="nav-item nav-link h5 text-white">Menu</a>
             @auth
                 @if (auth()->user()->type_client !== 'admin')
                     <a href="{{route('home')}}" class="nav-item nav-link h5 text-white active">Home</a>
                 @else                 
                     <a href="/adminHome" class="nav-item nav-link h5 text-white active">Home</a>
-                @endif
-                    <a href="/plats" class="nav-item nav-link h5 text-white">Menu</a>
-            
-        
-             @endauth
-         
+                @endif            
+            @endauth
         </div>
         <div class="navbar-nav ml-auto">
 

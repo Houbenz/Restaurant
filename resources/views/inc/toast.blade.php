@@ -17,7 +17,7 @@
  @endforeach
 @endif
 @if(session('message'))
- <div style="position: fixed; top: 10%; right: 5%; z-index: 20000">
+ <div class="col-3" style="position: fixed; top: 10%; right: 5%; z-index: 20000">
          <div class="toast fade show" role="alert" aria-live="polite" aria-atomic="true" data-delay="5000">
              <div class="toast-header">
                  <strong class="mr-auto"><i class="fa fa-globe"></i>Message</strong>

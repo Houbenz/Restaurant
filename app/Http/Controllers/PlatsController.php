@@ -25,12 +25,13 @@ class PlatsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $req)
     {
 
             $plats =Plat::all();
 
-            return view('plats.index')->with("plats",$plats);
+            return view('plats.index')->with("plats",$plats)
+                                        ->with("message",$req->message);
     }
 
     /**

@@ -52,7 +52,14 @@ class CommandeController extends Controller
             # code...
             $commande->type ='dehors';
         } else {
-            # code...
+            $etat = ['lancer','valider','prete','servi'];
+            $result = Commande::whereIn('etat' ,$etat)
+                    ->where('id',$commande->id_client)
+                    ->first();
+            if ($result) {  
+                return redirect('/plats')->with('message' , 'cette table a une commande non paye
+                                                    (vous ne pouvez pas lancer une autre qu\'apres payer la premiere');
+            }
             $commande->type ='interne';
         }        
         $commande->save();

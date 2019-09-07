@@ -2,80 +2,61 @@
 
 @section('content')
     <div class="container">
-        <div id="accordion">
-            <div class="card">
-                <div class="card-header text-center">
-                    <h5 class="card-link" data-toggle="collapse" href="#collapseOne">
-                        Recherche Menu
-                    </h5>
-                </div>
-                <div id="collapseOne" class="collapse" data-parent="#accordion">
-                    <div class="card-body">
-                        <div class="row col-12">
-                            <form class="form-inline col-12" action="/recherchePlats" method="get" id="recherchePlats" >
-                                <div class="form-group col-5">
-                                    <label for="type">Type: </label>
-                                    <select class="form-control offset-1 col-5" name="type" id="type">
-                                        <option value="%">Tout les repas</option>
-                                        <option value="pizza">Nos Pizzas</option>
-                                        <option value="sandwich">Nos Sandwichs</option>
-                                        <option value="plat">Nos Plats</option>
-                                        <option value="boisson">Nos Boisson</option>
-                                    </select>
-                                </div>                            
-                                <div class="form-group col-5">
-                                        <label for="prix">Prix: </label>
-                                        <input type="number" class="form-control offset-1 col-5" name="prix" id="prix" aria-describedby="helpId" placeholder="">
-                                        <small id="helpId" class="form-text text-muted offset-1"> prix < à</small>
-                                </div>
-                                <button type="submit" class="btn btn-primary col-2">Submit</button>
-                            </form>
-                        </div>
-                        <div class="row col-12" id="resultat">
-                            
-                        </div>
+        <div class="row justify-content-center">
+            <div class="col-md-10">
+                <div class="card">
+                    <div class="card-header row">
+                        <small class="offset-1">
+                            User : {{auth()->user()->nom}}
+                        </small>
+                        <small class="offset-7">
+                                {{strftime("%m/%d/%Y %H:%M")}}
+                        </small>
                     </div>
-                </div>
-            </div>
-            <div class="card">
-                    <div class="card-header text-center">
-                        <h5>
-                            <a class="collapsed card-link" data-toggle="collapse" href="#collapseTwo">
-                                    Tout les plâts !
-                            </a>
-                        </h5>
-                    </div>
-                    <div id="collapseTwo" class="collapse show" data-parent="#accordion">
-                        <div class="card-body">
-                            @include('inc.platsCards')
-                        </div>
-                    </div>
-            </div>
-        </div>
-    </div>
-    <style>
-        .card-link{
-            cursor: pointer;
-            color: #696969;
-        }
-        .card-link:hover{
-            color: black
-        }    
-    </style>
-    <script>
-        $("#recherchePlats").submit(function(event){
-            event.preventDefault(); //prevent default action 
-            var post_url = $(this).attr("action"); //get form action url
-            var request_method = $(this).attr("method"); //get form GET/POST method
-            var form_data = $(this).serialize(); //Encode form elements for submission
             
-            $.ajax({
-                url : post_url,
-                type: request_method,
-                data : form_data
-            }).done(function(response){ //
-                $("#resultat").html(response);
-            });
-        });
-    </script>
+                    <div class="card-body">
+                        @if (count($commandes) > 0)
+            
+                            <div class="row">
+                            <h3 class="col-4">Commandes {{$commandes[0]->type}}s</h3>
+                            </div>
+                            <br>
+                            <table class="table table-striped">
+                                <tr>
+                                        <th>Num</th>
+                                        <th>Table</th>
+                                        <th>Total</th>
+                                        <th>Action</th>
+                                </tr>
+                                @foreach ($commandes as $commande)
+                                    <tr>
+                                        <td>{{$commande->id}}</td>
+                                        <td>{{$commande->client->nom}}</td>
+                                        <td>{{$totals[$commande->id]}}.00 DZD</td>
+                                        <td>
+                                            @if ($commande->etat == 'lancer')
+                                                {{ Form::open(['url' => '/etatCommande' ,'method' => 'post']) }}
+                                                    @csrf
+                                                    {{Form::hidden('commande',$commande->id)}}
+                                                    {{Form::hidden('etat','valider')}}
+                                                    {{Form::submit('Valider',['class' => 'btn btn-info col-12'])}}
+                                                {{ Form::close() }}
+                                            @else
+                                                {{ Form::open(['url' => '/etatCommande' ,'method' => 'post']) }}
+                                                    @csrf
+                                                    {{Form::hidden('commande',$commande->id)}}
+                                                    {{Form::hidden('etat','prete')}}
+                                                    {{Form::submit('Commande prete',['class' => 'btn btn-warning col-12'])}}
+                                                {{ Form::close() }}
+                                            @endif
+                                        </td>      
+                                    </tr>                  
+                                @endforeach
+                            </table>
+                        @endif
+                    </div>
+                </div>
+            </div>
+            </div>
+    </div>
 @endsection
