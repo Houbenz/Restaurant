@@ -29,10 +29,28 @@ class LoginController extends Controller
 
     protected function redirectTo()
     {
-        if(Auth::user()->type_client == 'admin')
-        return '/adminHome';
-        else
-        return '/home';
+     
+      switch (Auth::user()->type_client) {
+            case 'admin':
+            return '/adminHome';
+                break;
+                
+            case 'responsable':
+            return '/listeCommandes';
+            break;
+            
+            case 'chef_cuisinier':
+            return '/listeCommandes';
+                break;
+                
+            case 'serveur':
+            return '/listeCommandes';
+            break;
+            
+            default:               
+            return '/home';
+            break;
+        }
     }
 
     /**
