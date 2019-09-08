@@ -55,6 +55,21 @@
                 </a>
             @endif          
             @endauth
+            @guest
+                 <!--Notification panel-->
+                 <a class="btn btn-light  text-white mr-3" href="/panier">
+                            
+                    <img src="{{asset('pictures/cart.svg')}}" alt="img" width="32" height="32">
+                    <span id='cart_quantity' class="badge badge-light" style="margin-left:-4px">
+
+                        @if (session('plats'))
+                                {{count(session('plats'))}}  
+                        @else
+                                0
+                        @endif
+                    </span>
+                </a>
+            @endguest
 
             @if(Route::has('login'))
               @auth
