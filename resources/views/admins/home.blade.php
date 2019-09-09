@@ -8,11 +8,9 @@
         <div class="bg-light border-right" id="sidebar-wrapper">
           <div class="sidebar-heading">Options </div>
           <div class="list-group list-group-flush">
-            <a href="/register_user" class="list-group-item list-group-item-action bg-light">Ajouter un employé</a>
-            <a href="#" class="list-group-item list-group-item-action bg-light">Ajouter un plat</a>
+            <a href="/register_user" class="list-group-item list-group-item-action bg-light">Ajouter un employé/Table</a>
             <a href="/all_users" class="list-group-item list-group-item-action bg-light">Voir les utilsateurs</a>
             <a href="#" class="list-group-item list-group-item-action bg-light">Toutes les commandes</a>
-            <a href="#" class="list-group-item list-group-item-action bg-light">Mon Profile</a>
             <a href="#" class="list-group-item list-group-item-action bg-light">Mon Status</a>
           </div>
         </div>

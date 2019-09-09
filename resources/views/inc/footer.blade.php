@@ -9,7 +9,7 @@
             <div class="row text-center">
                 <div class="col-md-3"></div>
                 <div class="col-md-6">
-                    <h5 class="text-center text-white">Get Connected with us in social media</h5>
+                    <h5 class="text-center text-white">Connectez vous avec nous dans les média sociaux</h5>
                 </div>
                 <div class="col-md-3"></div>
             </div>
@@ -62,7 +62,6 @@
                                 <li>restaurant@gmail.com</li><br>
                                 <li>+213 031807737</li><br>
                                 <li>+213 0794511326</li>
-                                <li><a href="/admin_login">S'authentifier en tantqu'administrateur</a></li>
                             </ul>
                     </div>
                     

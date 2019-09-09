@@ -1,6 +1,6 @@
 
 <div class="container">
-    <h2 class="text-center font-weight-bold mb-5">Contact Us</h2>
+    <h2 class="text-center font-weight-bold mb-5">Contactez Nous</h2>
 <div class="row text-center">
     <div class="col-lg-5 col-md-12" >
             <form method="" action="" class=" mb-4 p-4 grey-text border border-black">

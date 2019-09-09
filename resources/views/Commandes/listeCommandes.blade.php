@@ -18,7 +18,7 @@
             @if (count($commandes) > 0)
 
                 <div class="row">
-                <h3 class="col-4">Commandes {{$commandes[0]->type}}s</h3>
+                <h3 class="col-4">Commandes {{$commandes[0]->type}}</h3>
                 </div>
                 <br>
                 <table class="table table-striped">
