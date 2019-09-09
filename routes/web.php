@@ -77,3 +77,5 @@ Route::get('/all_users','AdminController@getUsers');
 
 Route::post('/modify','AdminController@modify');
 Route::post('/bloque','AdminController@bloque');
+
+Route::get('/listAdmin','AdminController@getAllCommandes');

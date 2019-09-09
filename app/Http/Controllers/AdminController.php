@@ -8,6 +8,7 @@ use App\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\DB;
+use App\Commande;
 
 class AdminController extends Controller
 {
@@ -53,7 +54,7 @@ class AdminController extends Controller
             
             $user->save();
 
-            return Redirect::to('/register_user')->with('status','Utilisateur ajouté avec succès');
+            return Redirect::to('/register_user')->with('message','Utilisateur ajouté avec succès');
 
         }
 
@@ -83,7 +84,15 @@ class AdminController extends Controller
                         ]);
         }
 
-    
+        
+        public function getAllCommandes()
+        {
+            $commandes = Commande::all();
+
+            return view('admins.listCommandes')->with('commandes',$commandes);
+
+        }
+
     public function getUsers()
     {
         $users = User::all();
