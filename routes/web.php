@@ -44,6 +44,11 @@ Route::get('/tr', 'PagesController@testRobvan');
 Route::get('/panier','PagesController@modifierPanier');
 
 Route::get('/listeCommandes','pagesController@listeCommandes');
+Route::get('/listeServeur','pagesController@listeServeur');
+Route::get('/listeCaissier','pagesController@listeCaissier');
+
+
+
 
 Route::post('/etatCommande','pagesController@etatCommande');
 

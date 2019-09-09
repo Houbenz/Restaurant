@@ -16,7 +16,8 @@ class PagesController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth' ,['except' => ['index' , 'modifierPanier','removePlatFromPanier','recherchePlats']]);
+        $this->middleware('auth' ,['except' => ['index' , 'modifierPanier','removePlatFromPanier',
+                                            'recherchePlats']]);
     }
 
     public function index(){
@@ -125,17 +126,23 @@ class PagesController extends Controller
 
     public function etatCommande(Request $request)
     {
+        $type =auth()->user()->type_client;
+        if($type == 'serveur' || $type == 'caissier'){
+            $view = '/listeServeur';
+        }else{
+            $view = '/listeCommandes';
+        }
         $commande = Commande::find($request->input('commande'));
         $commande->etat = $request->input('etat');
         if($commande->etat == 'valider' || $commande->etat =='annuler' ){
             $commande->id_valideur = auth()->user()->id;
         }
         if($commande->etat == 'servi'){
-            $commande->id_serveur = auth()->user()->id;
+            $commande->id_serveur = auth()->user()->id;   
         }
         $commande->save();
         
-        return redirect('/listeCommandes')->with('message','la commande est : '.$commande->etat);   
+        return redirect($view)->with('message','la commande est : '.$commande->etat);   
     }
 
 public function recherchePlats(Request $request){
@@ -157,7 +164,7 @@ public function recherchePlats(Request $request){
     return $view;
 }
 
-public function listeCommandesCaissier(){
+public function listeCaissier(){
     $commandes = Commande::where([
         ['etat', 'servi'],
         ['type', 'interne'],
@@ -176,7 +183,26 @@ public function listeCommandesCaissier(){
         $totals = $totals + array($commande->id => $total);
         $total=0;
     }   
-    return view('commandes.listeCommandes')->with('commandes',$commandes)
+    return view('commandes.listeServeur')->with('commandes',$commandes)
+                                            ->with('totals' , $totals);
+}
+public function listeServeur(){
+    $commandes = Commande::whereIn('etat', ['prete','servi'])->get();
+    
+    $totals=array();
+    $total=0;
+
+    foreach ($commandes as $commande) {
+        # code...
+        $plats = $commande->plat;
+        foreach ($plats as $plat) {
+            # code...
+            $total = $total + $plat->prix;
+        }
+        $totals = $totals + array($commande->id => $total);
+        $total=0;
+    }   
+    return view('commandes.listeServeur')->with('commandes',$commandes)
                                             ->with('totals' , $totals);
 }
 public function loginAdminRoute(){

@@ -24,7 +24,11 @@
                             @break
                             
                             @case('serveur')
-                            <a href="/listeCommandes" class="nav-item nav-link h5 text-white active">Page d'accueil</a>
+                            <a href="/listeServeur" class="nav-item nav-link h5 text-white active">Page d'accueil</a>
+                                
+                            @break
+                            @case('caissier')
+                            <a href="/listeCaissier" class="nav-item nav-link h5 text-white active">Page d'accueil</a>
                                 
                             @break
 
@@ -100,7 +104,11 @@
                                    @break
                                    
                                    @case('serveur')
-                                   <a href="/listeCommandes" class="dropdown-item">Commandes a controller</a>
+                                   <a href="/listeServeur" class="dropdown-item">Commandes a controller</a>
+                                       
+                                   @break
+                                   @case('caissier')
+                                   <a href="/listeCaissier" class="dropdown-item">Commandes a controller</a>
                                        
                                    @break
        
