@@ -8,7 +8,7 @@ use App\User;
 
 class Commande extends Model
 {
-    protected $attributes = [
+    /*protected $attributes = [
         'id_client' => 0,
         'id_serveur' => 0,
         'id_valideur' => 0,
@@ -34,6 +34,6 @@ class Commande extends Model
     
     public function valideur()
     {
-        return $this->belongsTo('App/User','id_valideur');
+        return $this->belongsTo('App\User','id_valideur');
     }
 }

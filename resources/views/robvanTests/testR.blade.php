@@ -13,7 +13,6 @@
                                 {{strftime("%m/%d/%Y %H:%M")}}
                         </small>
                     </div>
-            
                     <div class="card-body">
                         @if (count($commandes) > 0)
             

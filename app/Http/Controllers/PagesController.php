@@ -92,7 +92,7 @@ class PagesController extends Controller
                     ])->orWhere('etat', 'valider')->get();
             }else {
                 # code...
-                return redirect('/plats')->with('message','    that page is forbiden   ');
+                return redirect('/plats')->with('message','Vous n\'avez le droit pour acceder a cette page');
             }
         }
         
@@ -128,14 +128,14 @@ class PagesController extends Controller
         $commande = Commande::find($request->input('commande'));
         $commande->etat = $request->input('etat');
         if($commande->etat == 'valider' || $commande->etat =='annuler' ){
-            $commande->valideur = auth()->user()->id;
+            $commande->id_valideur = auth()->user()->id;
         }
         if($commande->etat == 'servi'){
-            $commande->serveur = auth()->user()->id;
+            $commande->id_serveur = auth()->user()->id;
         }
         $commande->save();
         
-        return redirect('/listeCommandes')->with('message','la commande est : '.$commande->etat);;   
+        return redirect('/listeCommandes')->with('message','la commande est : '.$commande->etat);   
     }
 
 public function recherchePlats(Request $request){
@@ -155,6 +155,29 @@ public function recherchePlats(Request $request){
     }
     $view = view("inc.platsCards",['plats' => $plats]);
     return $view;
+}
+
+public function listeCommandesCaissier(){
+    $commandes = Commande::where([
+        ['etat', 'servi'],
+        ['type', 'interne'],
+    ])->get();
+    
+    $totals=array();
+    $total=0;
+
+    foreach ($commandes as $commande) {
+        # code...
+        $plats = $commande->plat;
+        foreach ($plats as $plat) {
+            # code...
+            $total = $total + $plat->prix;
+        }
+        $totals = $totals + array($commande->id => $total);
+        $total=0;
+    }   
+    return view('commandes.listeCommandes')->with('commandes',$commandes)
+                                            ->with('totals' , $totals);
 }
 public function loginAdminRoute(){
 

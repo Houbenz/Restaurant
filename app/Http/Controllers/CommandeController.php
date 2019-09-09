@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Plat;
 use App\Commande;
+use App\User;
 
 class CommandeController extends Controller
 {
