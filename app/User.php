@@ -66,7 +66,7 @@ class User extends Authenticatable
 
     public function notifR()
     {
-        return $this->hasMany('App/Notifications','id_dist');
+        return $this->hasMany('App/Notification','id_dist');
     }   
 
     public function message(){

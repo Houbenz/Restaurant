@@ -3,8 +3,6 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Plat;
-use App\User;
 
 class Commande extends Model
 {

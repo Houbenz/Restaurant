@@ -44,7 +44,7 @@
             @if (auth()->user()->type_client == 'client_dehors' ||auth()->user()->type_client == 'client_dedans' )
                 
            
-                <!--Notification panel-->
+                <!--cart auth panel-->
                 <a class="btn btn-light  text-white mr-3" href="/panier">
                             
                     <img src="{{asset('pictures/cart.svg')}}" alt="img" width="32" height="32">
@@ -57,10 +57,34 @@
                         @endif
                     </span>
                 </a>
+
             @endif          
+                 <!--Notification panel  -->
+            
+            <div class="dropdown mr-1">
+                    <span style="cursor:pointer" 
+                    class=" btn btn-dark nav-link drop-down dropdown-toggle text-white mr-5" data-toggle="dropdown">
+                    
+                    <img src="{{asset('pictures/bell.svg')}}" alt="img" width="32" height="32">
+                        0
+                    </span>
+
+                        
+                    <div class="dropdown-menu">
+
+                        <!-- put your notifications here -->
+                            
+                    <div><p>{{auth()->user()->adresse}}</p></div>
+
+                    </div>
+            </div>
+
+
+                    </span>
+               
             @endauth
             @guest
-                 <!--Notification panel-->
+                 <!--cart guest panel-->
                  <a class="btn btn-light  text-white mr-3" href="/panier">
                             
                     <img src="{{asset('pictures/cart.svg')}}" alt="img" width="32" height="32">

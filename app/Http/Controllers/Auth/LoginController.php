@@ -44,8 +44,13 @@ class LoginController extends Controller
                 break;
                 
             case 'serveur':
-            return '/listeCommandes';
+            return '/listeServeur';
             break;
+
+            case 'serveur':
+            return '/listeCaissier';
+            break;
+
             
             default:               
             return '/home';

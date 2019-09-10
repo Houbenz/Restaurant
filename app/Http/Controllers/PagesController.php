@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\User;
 use App\Plat;
 use App\Commande;
+use App\Notification;
 
 class PagesController extends Controller
 {    
@@ -138,7 +139,17 @@ class PagesController extends Controller
             $commande->id_valideur = auth()->user()->id;
         }
         if($commande->etat == 'servi'){
-            $commande->id_serveur = auth()->user()->id;   
+
+            $commande->id_serveur = auth()->user()->id; 
+
+           $notification = new  Notification;
+           $notification->id_src=$commande->id_serveur;
+           $notification->id_dist=$commande->id_client;
+           $notification->titre='serivce';
+           $notification->etat='new';
+           $notification->contenu='votre commande est servie';
+           $notification->save();
+  
         }
         $commande->save();
         
