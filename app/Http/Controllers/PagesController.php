@@ -142,12 +142,15 @@ class PagesController extends Controller
 
             $commande->id_serveur = auth()->user()->id; 
 
+
+            //here where i added notification 
+
            $notification = new  Notification;
            $notification->id_src=$commande->id_serveur;
            $notification->id_dist=$commande->id_client;
            $notification->titre='serivce';
            $notification->etat='new';
-           $notification->contenu='votre commande est servie';
+           $notification->contenu='votre commande N°'.$commande->id.' est servie';
            $notification->save();
   
         }
@@ -216,6 +219,14 @@ public function listeServeur(){
     return view('commandes.listeServeur')->with('commandes',$commandes)
                                             ->with('totals' , $totals);
 }
+
+public function getNotification(Request $request)
+{
+    $notifications =Notification::where('id_dist',$request->input('id'))->get();
+    
+    return response()->json(array('notifications'=> $notifications),200);
+}
+
 public function loginAdminRoute(){
 
     return view('admins.login');

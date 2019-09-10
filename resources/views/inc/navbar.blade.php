@@ -60,28 +60,25 @@
 
             @endif          
                  <!--Notification panel  -->
-            
-            <div class="dropdown mr-1">
+
+
+            <div class="dropdown mr-1" onclick="load_new_notification({{auth()->user()->id}})">
                     <span style="cursor:pointer" 
-                    class=" btn btn-dark nav-link drop-down dropdown-toggle text-white mr-5" data-toggle="dropdown">
+                    class=" btn btn-dark nav-link drop-down dropdown-toggle text-white mr-5" 
+                    data-toggle="dropdown">
                     
                     <img src="{{asset('pictures/bell.svg')}}" alt="img" width="32" height="32">
                         0
                     </span>
 
+                    <form action="" method="post"></form>
                         
-                    <div class="dropdown-menu">
+                    <div class="dropdown-menu" id='putNotification' ">
 
                         <!-- put your notifications here -->
                             
-                    <div><p>{{auth()->user()->adresse}}</p></div>
-
                     </div>
             </div>
-
-
-                    </span>
-               
             @endauth
             @guest
                  <!--cart guest panel-->

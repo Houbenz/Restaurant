@@ -42,6 +42,7 @@
 <script src="{{ asset('js/toast.js')}}"></script>
 <script src="{{asset('js/sendAjax.js')}}"></script>
 <script src="{{asset('js/all_users.js')}}"></script>
+<script src="{{asset('js/notification.js')}}"></script>
 <script>
 $('.carousel').carousel({
     interval :2000,

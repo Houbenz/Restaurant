@@ -84,3 +84,8 @@ Route::post('/modify','AdminController@modify');
 Route::post('/bloque','AdminController@bloque');
 
 Route::get('/listAdmin','AdminController@getAllCommandes');
+
+
+//for notifications
+
+Route::post('/notification','PagesController@getNotification');
