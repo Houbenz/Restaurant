@@ -38,18 +38,18 @@ class PagesController extends Controller
         $somme=0;
 
         if($listePlats){
-        for ($i=0; $i <count($listePlats) ; $i++) { 
-            
-             $plat = Plat::find($listePlats[$i]) ;
+            for ($i=0; $i <count($listePlats) ; $i++) { 
+                
+                $plat = Plat::find($listePlats[$i]) ;
 
-            array_push($plats,$plat);
+                array_push($plats,$plat);
+            }
+
+            foreach($plats as $plat){
+                $somme += $plat->prix;
+            }
+
         }
-
-        foreach($plats as $plat){
-            $somme += $plat->prix;
-        }
-
-    }
         return view('panier')->with(['plats' => $plats,'somme' => $somme]);
 
     }
@@ -125,13 +125,29 @@ class PagesController extends Controller
        
     }
 
+    public function saveNotification(Commande $commande){
+        //here where i added notification 
+    
+        $notification = new  Notification;
+        $notification->id_src = $commande->id_serveur;
+        $notification->id_dist = $commande->id_client;
+        $notification->titre='serivce';
+        $notification->etat='new';
+        $notification->contenu = 'votre commande du N°'.$commande->id.' a eté '.$commande->etat;
+        $notification->save();
+    
+    }
+
     public function etatCommande(Request $request)
     {
         $type =auth()->user()->type_client;
-        if($type == 'serveur' || $type == 'caissier'){
+        if($type == 'serveur'){
             $view = '/listeServeur';
         }else{
             $view = '/listeCommandes';
+        }
+        if($type == 'caissier'){
+            $view = '/listeCaissier';
         }
         $commande = Commande::find($request->input('commande'));
         $commande->etat = $request->input('etat');
@@ -140,21 +156,10 @@ class PagesController extends Controller
         }
         if($commande->etat == 'servi'){
 
-            $commande->id_serveur = auth()->user()->id; 
-
-
-            //here where i added notification 
-
-           $notification = new  Notification;
-           $notification->id_src=$commande->id_serveur;
-           $notification->id_dist=$commande->id_client;
-           $notification->titre='serivce';
-           $notification->etat='new';
-           $notification->contenu='votre commande N°'.$commande->id.' est servie';
-           $notification->save();
-  
+            $commande->id_serveur = auth()->user()->id;
         }
         $commande->save();
+        self::saveNotification($commande);
         
         return redirect($view)->with('message','la commande est : '.$commande->etat);   
     }
@@ -222,9 +227,15 @@ public function listeServeur(){
 
 public function getNotification(Request $request)
 {
-    $notifications =Notification::where('id_dist',$request->input('id'))->get();
-    
-    return response()->json(array('notifications'=> $notifications),200);
+    $notifications =Notification::where('id_dist',auth()->user()->id)
+                    ->where('etat','new')->get();
+    $view = view("inc.notification",['notifications' => $notifications]);
+    foreach ($notifications as $notif) {
+        # code...
+        $notif->etat = 'read';
+        $notif->save();
+    }
+    return $view;
 }
 
 public function loginAdminRoute(){

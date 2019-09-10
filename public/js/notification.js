@@ -1,4 +1,6 @@
-
+$(document).ready(function(){
+    
+  });
 
     $.ajaxSetup({
         headers: {
@@ -7,29 +9,13 @@
                 });
 
 
-function load_new_notification(id){
+function load_new_notification(){
 
     $.ajax({
         type:'post',
         url:'/notification',
-        data:{
-            id:id
-        },
-        success:function(data){
-
-                for(let i = 0 ; i < data.notifications.length;i++){
-
-                    $("#putNotification").html(
-                        $("#putNotification").html()+ 
-
-                    "<div class='p-2'><small class='dropdown-item'><strong>"+data.notifications[i].titre
-                    +"</strong></small> <small>"+data.notifications[i].contenu+
-                    "</small><br/><small>"+data.notifications[i].created_at+"</small></div> <hr>");
-                }
-        }
-
-    
-    })
-
+    }).done(function(response){
+        $("#putNotification").html(response);
+    });   
 }
 

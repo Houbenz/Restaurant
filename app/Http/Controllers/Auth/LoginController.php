@@ -47,7 +47,7 @@ class LoginController extends Controller
             return '/listeServeur';
             break;
 
-            case 'serveur':
+            case 'caissier':
             return '/listeCaissier';
             break;
 

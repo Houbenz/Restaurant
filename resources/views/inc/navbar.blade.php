@@ -62,7 +62,7 @@
                  <!--Notification panel  -->
 
 
-            <div class="dropdown mr-1" onclick="load_new_notification({{auth()->user()->id}})">
+            <div class="dropdown mr-1" onclick="load_new_notification()">
                     <span style="cursor:pointer" 
                     class=" btn btn-dark nav-link drop-down dropdown-toggle text-white mr-5" 
                     data-toggle="dropdown">
