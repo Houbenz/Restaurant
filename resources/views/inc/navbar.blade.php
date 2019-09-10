@@ -78,7 +78,7 @@
             @if(Route::has('login'))
               @auth
 
-              <div class="dropdown">
+              <div class="dropdown mr-5">
                  <span style="cursor:pointer" class=" btn btn-grey nav-link drop-down dropdown-toggle text-white mr-5" data-toggle="dropdown">
                      <strong> {{Auth::user()->nom}} </strong></span>
                  <div class="dropdown-menu">
