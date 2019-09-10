@@ -11,7 +11,6 @@
             <a href="/register_user" class="list-group-item list-group-item-action bg-light">Ajouter un employé/Table</a>
             <a href="/all_users" class="list-group-item list-group-item-action bg-light">Voir les utilsateurs</a>
             <a href="/listAdmin" class="list-group-item list-group-item-action bg-light">Toutes les commandes</a>
-            <a href="#" class="list-group-item list-group-item-action bg-light">Mon Status</a>
           </div>
         </div>
         <!-- /#sidebar-wrapper -->

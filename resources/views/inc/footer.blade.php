@@ -48,8 +48,7 @@
                             text-uppercase text-footer-border"><strong>
                                 <span class="text-warning">resta</span><span class="text-primary">urant</span></strong> &trade;</h3>
 
-                            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Molestiae eligendi eum voluptatum hic quae, repudiandae ipsa,
-                                 sit cumque nisi quam reprehenderit nulla accusantium nesciunt quibusdam maiores numquam magni tempora. Quis!</p>
+                            <p>© 2019 Restaurant, Inc.</p>
                     </div>
                     
                     <div class="col-md-3 text-white text-center mb-3">
