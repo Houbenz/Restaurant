@@ -17,4 +17,11 @@
         </span>
         <div class="dropdown-divider"></div>
     @endforeach
+    @if (count($notifications) == 0)
+        <span class="dropdown-item">
+            
+        <h4>Vous n'avez aucune notification</h4>            
+           
+        </span>
+    @endif
 @endif

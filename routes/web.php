@@ -89,3 +89,5 @@ Route::get('/listAdmin','AdminController@getAllCommandes');
 //for notifications
 
 Route::post('/notification','PagesController@getNotification');
+Route::post('/countNotifications','pagesController@countNotifications');
+

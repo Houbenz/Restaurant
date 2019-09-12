@@ -62,18 +62,17 @@
                  <!--Notification panel  -->
 
 
-            <div class="dropdown mr-1" onclick="load_new_notification()">
+            <div class="dropdown mr-1" >
                     <span style="cursor:pointer" 
                     class=" btn btn-dark nav-link drop-down dropdown-toggle text-white mr-5" 
-                    data-toggle="dropdown">
+                    data-toggle="dropdown"
+                    onclick="load_new_notification()">
                     
                     <img src="{{asset('pictures/bell.svg')}}" alt="img" width="32" height="32">
-                        0
+                        <span id='notifSpan' class="badge badge-light">0</span>
                     </span>
 
-                    <form action="" method="post"></form>
-                        
-                    <div class="dropdown-menu" id='putNotification' ">
+                    <div class="dropdown-menu" id='putNotification'>
 
                         <!-- put your notifications here -->
                             

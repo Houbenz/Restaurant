@@ -238,6 +238,13 @@ public function getNotification(Request $request)
     return $view;
 }
 
+public function countNotifications(){
+    $notifications = Notification::where('id_dist',auth()->user()->id)
+                                    ->where('etat','new')->get();
+    
+    return count($notifications);
+}
+
 public function loginAdminRoute(){
 
     return view('admins.login');
