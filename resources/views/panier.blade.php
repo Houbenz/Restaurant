@@ -8,7 +8,7 @@
 
 <div class=" row d-flex justify-content-center align-items-center pb-4">
 
-    <h3 class="text-center display-2">Commandes</h3>
+    <h3 class="text-center display-2">Votre Panier</h3>
 </div>
 @if ($plats)
     

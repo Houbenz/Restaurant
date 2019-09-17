@@ -20,7 +20,7 @@
     @if (count($notifications) == 0)
         <span class="dropdown-item">
             
-        <h4>Vous n'avez aucune notification</h4>            
+        <h5>Vous n'avez aucune notification</h5>            
            
         </span>
     @endif

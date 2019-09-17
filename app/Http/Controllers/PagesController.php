@@ -129,7 +129,7 @@ class PagesController extends Controller
         //here where i added notification 
     
         $notification = new  Notification;
-        $notification->id_src = $commande->id_serveur;
+        $notification->id_src = auth()->user()->id;
         $notification->id_dist = $commande->id_client;
         $notification->titre='serivce';
         $notification->etat='new';

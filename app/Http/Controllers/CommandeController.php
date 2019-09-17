@@ -55,9 +55,9 @@ class CommandeController extends Controller
         } else {
             $etat = ['lancer','valider','prete','servi'];
             $result = Commande::whereIn('etat' ,$etat)
-                    ->where('id',$commande->id_client)
-                    ->first();
-            if ($result) {  
+                    ->where('id_client',$commande->id_client)
+                    ->get();
+            if (count($result) > 0) {  
                 return redirect('/plats')->with('message' , 'cette table a une commande non paye
                                                     (vous ne pouvez pas lancer une autre qu\'apres payer la premiere');
             }

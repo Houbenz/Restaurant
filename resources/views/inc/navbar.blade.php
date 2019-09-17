@@ -1,8 +1,9 @@
 
 <div class="navbar fixed-top navbar-expand bg-dark text-white">
 
-    <span class="navbar-brand h3 font-weight-bold">
-        <span class="text-warning">RESTA</span><span class="text-primary">URANT</span> </span> 
+    <a class="navbar-brand h3 font-weight-bold" href="/">
+        <span class="text-warning">RESTA</span><span class="text-primary">URANT</span> 
+    </a> 
 
         <div class="navbar-nav mr-auto">
 
@@ -33,15 +34,19 @@
                             @break
 
                             @default
-                            <a href="{{route('home')}}" class="nav-item nav-link h5 text-white active">Page d'accueil</a>
                             <a href="/plats" class="nav-item nav-link h5 text-white">Menu</a>
+                            <a href="{{route('home')}}" class="nav-item nav-link h5 text-white active">Page d'accueil</a>
                     @endswitch
             @endauth
+            @guest
+                <a href="/plats" class="nav-item nav-link h5 text-white">Menu</a>
+            @endguest
+
         </div>
         <div class="navbar-nav ml-auto">
 
             @auth
-            @if (auth()->user()->type_client == 'client_dehors' ||auth()->user()->type_client == 'client_dedans' )
+            @if (auth()->user()->type_client == 'client_dehors' ||auth()->user()->type_client == 'table' )
                 
            
                 <!--cart auth panel-->
@@ -57,12 +62,10 @@
                         @endif
                     </span>
                 </a>
-
-            @endif          
-                 <!--Notification panel  -->
+                <!--Notification panel  -->
 
 
-            <div class="dropdown mr-1" >
+                <div class="dropdown mr-1" >
                     <span style="cursor:pointer" 
                     class=" btn btn-dark nav-link drop-down dropdown-toggle text-white mr-5" 
                     data-toggle="dropdown"
@@ -77,7 +80,8 @@
                         <!-- put your notifications here -->
                             
                     </div>
-            </div>
+                </div>
+            @endif          
             @endauth
             @guest
                  <!--cart guest panel-->
