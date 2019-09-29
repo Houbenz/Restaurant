@@ -17,7 +17,7 @@ class PagesController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth' ,['except' => ['index' , 'modifierPanier','removePlatFromPanier',
+        $this->middleware('auth' ,['except' => ['index','modifierPanier','removePlatFromPanier',
                                             'recherchePlats']]);
     }
 
@@ -79,6 +79,7 @@ class PagesController extends Controller
 
     public function listeCommandes()
     {
+        $view = view('commandes.listeCommandes');
         if (auth()->user()->type_client == 'responsable') {
             # code...
             $commandes = Commande::where([
@@ -86,16 +87,12 @@ class PagesController extends Controller
                 ['type', 'dehors'],
             ])->get();
         } else {
-            if (auth()->user()->type_client == 'chef_cuisinier') {
-                # code...
-                $commandes = Commande::where([
-                    ['etat', 'lancer'],
-                    ['type', 'interne'],
-                    ])->orWhere('etat', 'valider')->get();
-            }else {
-                # code...
-                return redirect('/plats')->with('message','Vous n\'avez le droit pour acceder a cette page');
-            }
+            $commandes = Commande::where([
+                ['etat', 'lancer'],
+                ['type', 'interne'],
+                ])->orWhere('etat', 'valider')->get(); 
+                
+                $view = view('commandes.listeCommandesCuisinier');
         }
         
        
@@ -112,17 +109,9 @@ class PagesController extends Controller
             $totals = $totals + array($commande->id => $total);
             $total=0;
         }
-            
-        if (auth()->user()->type_client == 'responsable') {
-            # code...
-            return view('commandes.listeCommandes')->with('commandes',$commandes)
-            ->with('totals' , $totals);
-        } else {
-            # code...
-            return view('commandes.listeCommandesCuisinier')->with('commandes',$commandes)
-            ->with('totals' , $totals);
-        }
-       
+
+        return $view -> with('commandes',$commandes)
+                     -> with('totals' , $totals);
     }
 
     public function saveNotification(Commande $commande){

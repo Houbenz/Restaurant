@@ -12,6 +12,7 @@ class CommandeController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $this->middleware('role:client_dehors,table')->except(['show']);
     }
     /**
      * Display a listing of the resource.
@@ -80,15 +81,15 @@ class CommandeController extends Controller
      */
     public function show($id)
     {
-        $plats= Commande::find($id)->plat;
-
+        $commande= Commande::find($id);
+        $plats = $commande->plat;
         $somme=0;
 
         foreach($plats as $plat){
             $somme += $plat->prix;
         }
 
-        return view('commandes.show',['plats'=> $plats,'command_id' => $id,'somme' => $somme]);
+        return view('commandes.show',['plats'=> $plats,'commande' => $commande,'somme' => $somme]);
     }
 
     /**

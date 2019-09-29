@@ -47,7 +47,7 @@
                 <label for="type_client">Type d'utilisateur : </label>
                 <select name='type_client' id='type_client' class="mdb-select md-form colorful-select dropdown-primary form-control" required>
                         <option value="serveur">Serveur</option>
-                        <option value="client_dedans">Table pour client</option>
+                        <option value="table">Table pour client</option>
                         <option value="chef_cuisinier">Cuisinier</option>
                         <option value="responsable">Responsable de commande</option>
                         <option value="livreur">Livreur</option>

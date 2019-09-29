@@ -17,7 +17,7 @@ class PlatsController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth' ,['except' => ['index' , 'show','addToCart']]);
+        $this->middleware(['auth','role:responsable'] ,['except' => ['index' , 'show','addToCart']]);
     }
 
     /**
@@ -128,10 +128,6 @@ class PlatsController extends Controller
     {
         $plat = plat::find($id);
         $user= user::find(auth()->user()->id);
-        //check for user id
-        if($user->type_client !== 'responsable'){
-            return view('/plats')->with('message','forbidden');
-        }
         return view('plats.edit')->with('plat',$plat)->with('user',$user);
     }
 

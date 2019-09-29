@@ -30,7 +30,20 @@
                     </tr>
                     @foreach ($commandes as $commande)
                         <tr>
-                            <td>{{$commande->id}}</td>
+                            <td>
+                                <a id="details" data-toggle="tooltip" data-placement="left" title="Detail de la commande" href="/commandes/{{$commande->id}}">
+                                    {{$commande->id}}
+                                </a>
+                                <script>
+                                    function hide(){
+                                        $('#details').tooltip('hide');
+                                    }
+                                    $('#details').tooltip('show');
+                                    setTimeout(hide,2000);
+                                    $('[data-toggle="tooltip"]').tooltip();
+
+                                </script>
+                            </td>
                             <td>{{$commande->client->nom}}</td>
                             <td>{{$totals[$commande->id]}}.00 DZD</td>
                             <td>

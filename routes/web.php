@@ -28,8 +28,7 @@ Route::get('user',function(){
 
 Auth::routes();
 
-//Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/home','CommandeController@index')->name('home');
+Route::get('/home','CommandeController@index')->name('home')->middleware('role:table,client_dehors');
 
 Route::post('/updateprofile','ModifyUserController@modify');
 
@@ -39,13 +38,13 @@ Route::get('/recherchePlats','PagesController@recherchePlats');
 //--------------------Pages controller-------------------
 
 Route::get('/', 'PagesController@index');
-Route::get('/tr', 'PagesController@testRobvan');
+Route::get('/tr', 'PagesController@testRobvan')->middleware('auth');
 
 Route::get('/panier','PagesController@modifierPanier');
 
-Route::get('/listeCommandes','pagesController@listeCommandes');
-Route::get('/listeServeur','pagesController@listeServeur');
-Route::get('/listeCaissier','pagesController@listeCaissier');
+Route::get('/listeCommandes','pagesController@listeCommandes')->middleware('role:responsable,chef_cuisinier]');
+Route::get('/listeServeur','pagesController@listeServeur')->middleware('role:serveur');
+Route::get('/listeCaissier','pagesController@listeCaissier')->middleware('role:caissier');
 
 
 
@@ -60,11 +59,12 @@ Route::resource('plats','platsController');
 
 Route::post('/sendAjax','platsController@addToCart');
 
-Route::get('/test',function(){
+/*Route::get('/test',function(){
 
     return view('commandes');
 
-});
+});*/
+
 Route::resource('commandes','commandeController');
 
 Route::resource('messages','MessageController');

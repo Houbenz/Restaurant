@@ -21,7 +21,8 @@
 
                             @case('responsable')                    
                             <a href="/listeCommandes" class="nav-item nav-link h5 text-white active">Page d'accueil</a>
-                            
+                            <a href="/plats" class="nav-item nav-link h5 text-white">Menu</a>
+
                             @break
                             
                             @case('serveur')

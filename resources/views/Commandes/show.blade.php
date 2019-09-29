@@ -8,9 +8,10 @@
 
         @if ($plats)
             
-        @if ($command_id)
+        @if ($commande->id)
             
-           <h3 class="text-center">Commande Num°:{{$command_id}}</h3>
+           <h3 class="text-center">Commande Num°:{{$commande->id}}</h3>
+        <h4 class="tex-center">Etat de commande:{{$commande->etat}}<h4>
         @endif
              <h5>Contenu : </h5>
 
