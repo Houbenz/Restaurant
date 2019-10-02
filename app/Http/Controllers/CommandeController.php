@@ -22,7 +22,8 @@ class CommandeController extends Controller
     public function index()
     {
 
-        $commandes = Commande::where('id_client',auth()->user()->id)->get();
+        $commandes = Commande::where('id_client',auth()->user()->id)->orderBy('id', 'desc')
+                                                                    ->simplePaginate(9);
       
          return view('commandes.index')->with('commandes',$commandes);
     }
