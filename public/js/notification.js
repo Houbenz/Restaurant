@@ -14,17 +14,18 @@ function myPeriodicMethod() {
         url: '/countNotifications' ,
         method: 'POST',
         success: function(data) {
-            if (data == 0) {
-                $('#notifSpan').prop('class','badge badge-light');
-            } else {
-                $('#notifSpan').prop('class','badge badge-danger');
+            if(!data.status === 401){
+                if (data == 0) {
+                    $('#notifSpan').prop('class','badge badge-light');
+                } else {
+                    $('#notifSpan').prop('class','badge badge-danger');
 
+                }
+                $('#notifSpan').html(data);
+                setTimeout(myPeriodicMethod, 5000);
             }
-            $('#notifSpan').html(data);
         },
-        complete: function() {
-            setTimeout(myPeriodicMethod, 5000);
-        }
+        
     });
     }
 function load_new_notification(){

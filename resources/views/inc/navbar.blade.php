@@ -1,15 +1,21 @@
 
-<div class="navbar fixed-top navbar-expand bg-dark text-white">
+<div class="navbar fixed-top navbar-expand-md bg-dark navbar-dark text-white">
 
     <a class="navbar-brand h3 font-weight-bold" href="/">
         <span class="text-warning">RESTA</span><span class="text-primary">URANT</span> 
     </a> 
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse text-center" id="navbarSupportedContent">
 
         <div class="navbar-nav mr-auto">
 
             @auth      
                     @switch(auth()->user()->type_client)
                             @case('admin')
+                            
                             <a href="/adminHome" class="nav-item nav-link h5 text-white active">Page d'accueil</a>
 
                             @break
@@ -107,53 +113,12 @@
                  <span style="cursor:pointer" class=" btn btn-grey nav-link drop-down dropdown-toggle text-white mr-5" data-toggle="dropdown">
                      <strong> {{Auth::user()->nom}} </strong></span>
                  <div class="dropdown-menu">
-
-
-
-                    <a href="/user" class="dropdown-item">Profile</a>    
-
-                           @switch(auth()->user()->type_client)
-                                   @case('admin')
-       
-                                   @break
-       
-                                   @case('chef_cuisinier')
-                                   <a href="/listeCommandes" class="dropdown-item">Commandes a controller</a>
-                                   
-                                   @break
-       
-                                   @case('responsable')                    
-                                   <a href="/plats/create" class="dropdown-item">Ajouter un plat</a>
-                                   <a href="/listeCommandes" class="dropdown-item">Commandes a controller</a>
-                                   
-                                   @break
-                                   
-                                   @case('serveur')
-                                   <a href="/listeServeur" class="dropdown-item">Commandes a controller</a>
-                                       
-                                   @break
-                                   @case('caissier')
-                                   <a href="/listeCaissier" class="dropdown-item">Commandes a controller</a>
-                                       
-                                   @break
-       
-                                   @default
-                                   <a href="/commandes" class="dropdown-item">Mes commandes</a>
-                           @endswitch     
-                           
-                           <form action="{{route('logout')}}" method="POST">
-                               @csrf
-                           <button type="submit" class=" dropdown-item text-danger ">Logout</button>
-                           </form>                    
-                
-                 </div>
+                    
+                    @include('inc.dropmenu')
+                 
+                </div>
              </div>
-
-
-             
-     
-
-      
+           
              @else
                     <a href="{{route('register')}}" class="nav-item btn btn-warning mr-3">Register</a>
 
@@ -167,4 +132,5 @@
 
              @endif
         </div>
+    </div>
 </div>

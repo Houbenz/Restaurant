@@ -15,15 +15,27 @@ class ModifyUserController extends Controller
 
     public  function modify(Request $request) {
 
-        DB::table('users')
-        ->where('id',$request->input("id"))
-            ->update([
-                'email' => $request->input('email'),
-                'nom'=>$request->input('nom'),
-                'adresse'=>$request->input('adresse'),
-                'num_tel'=>$request->input('num_tel'),
-                    ]);
+        $user = User::find(auth()->user()->id);
 
-        return redirect('/home')->with('success','profile mis à jour avec succès');
+        if($request -> hasFile('profile_image')){
+            //get filename with the extension
+            $fileNameWithExt = $request->file('profile_image')->getClientOriginalName();
+            //Get just filename
+            $filename = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
+            //get just ext
+            $extension = $request->file('profile_image')->getClientOriginalExtension();
+            //file name to store
+            $fileNameToStore = $filename.'_'.time().'.'.$extension;
+            //upload image
+             $request->file('profile_image')->storeAs('public/profile_images', $fileNameToStore);     
+             $user->profile_image = $fileNameToStore;
+        }
+        $user->email = $request->input('email') ;
+        $user->nom = $request->input('nom');
+        $user->adresse = $request->input('adresse');
+        $user->num_tel = $request->input('num_tel');
+        $user->save();
+
+        return redirect('/home')->with('message','profile mis à jour avec succès');
     }
 }

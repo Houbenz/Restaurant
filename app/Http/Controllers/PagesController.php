@@ -7,6 +7,7 @@ use App\User;
 use App\Plat;
 use App\Commande;
 use App\Notification;
+use Illuminate\Support\Facades\Auth;
 
 class PagesController extends Controller
 {    
@@ -229,6 +230,9 @@ public function getNotification(Request $request)
 }
 
 public function countNotifications(){
+    if(!Auth::check()){
+        return -1;
+    }
     $notifications = Notification::where('id_dist',auth()->user()->id)
                                     ->where('etat','new')->get();
     

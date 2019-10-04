@@ -3,15 +3,15 @@
 @section('content')
 
 <div class="container emp-profile">
-<form method="POST" action="/updateprofile" >
+<form method="POST" action="/updateprofile" enctype = "multipart/form-data" >
     @csrf
     <div class="row">
         <div class="col-md-4">
             <div class="profile-img">
-                <img  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS52y5aInsxSm31CvHOFHWujqUx_wWTS9iM6s7BAm21oEN_RiGoog" alt=""/>
-                <div class="file btn btn-lg btn-primary">
+                <img  src="storage/profile_images/{{auth()->user()->profile_image}}" alt=""/>
+                <div style="cursor:pointer" class="file btn btn-lg btn-primary">
                     Change Photo
-                    <input type="file" name="file"/>
+                    <input type="file" id="profile_image" name="profile_image" disabled/>
                 </div>
             </div>
         </div>
