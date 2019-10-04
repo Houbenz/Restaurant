@@ -1,13 +1,18 @@
 @if (count($plats) > 0)
-                
-    <ul class="cards col-12">
+@php
+    $i=0;
+@endphp    <ul class="cards col-12">
         @foreach ($plats as $plat) 
-            <li class="cards__item">
+            <li class="cards__item" data-aos="fade-up" data-aos-offset="{{200+($i%150)}}">
+               
+                @php
+                    $i +=50;
+                @endphp
                 <div class="card" style="width:18rem;height:24rem">
-                <a href="/plats/{{$plat->id}}" class="custom-card">
+                    <a href="/plats/{{$plat->id}}" class="custom-card">
                         <div class=" cover card__image card__image--fence" style="background-image:url('storage/cover_images/{{$plat->cover_image}}')">
                         </div>
-                </a>
+                    </a>
 
                     <div class="card__content">
                         <div class="card__title text-center" ><a href="/plats/{{$plat->id}}" class="custom-card">{{$plat->nom}}</a></div>
