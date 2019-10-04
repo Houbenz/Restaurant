@@ -49,6 +49,11 @@
                     <div id="collapseTwo" class="collapse show" data-parent="#accordion">
                         <div class="card-body">
                             @include('inc.platsCards')
+                        <div class="row">
+                            <div class="offset-md-5">
+                                    {{$plats->links()}}
+                            </div>
+                        </div>
                         </div>
                     </div>
             </div>
@@ -76,6 +81,7 @@
                 data : form_data
             }).done(function(response){ //
                 $("#resultat").html(response);
+                AOS.refreshHard();
             });
         });
     </script>

@@ -161,13 +161,14 @@ public function recherchePlats(Request $request){
         $prix=5000;
     }
     if($type == '%'){
-        $plats = Plat::where([['prix','<=',$prix],])->get();
+        $query = [['prix','<=',$prix],];
     }else{
-        $plats = Plat::where([
+        $query = [
             ['type', $type],
             ['prix','<=',$prix]
-        ])->get();
+        ];
     }
+    $plats = Plat::where($query)->get();
     $view = view("inc.platsCards",['plats' => $plats]);
     return $view;
 }

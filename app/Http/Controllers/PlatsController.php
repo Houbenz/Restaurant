@@ -28,7 +28,7 @@ class PlatsController extends Controller
     public function index(Request $req)
     {
 
-            $plats =Plat::all();
+            $plats =Plat::simplePaginate(6);
 
             return view('plats.index')->with("plats",$plats)
                                         ->with("message",$req->message);
