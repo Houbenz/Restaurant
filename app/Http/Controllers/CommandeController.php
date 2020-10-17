@@ -24,8 +24,8 @@ class CommandeController extends Controller
 
         $commandes = Commande::where('id_client',auth()->user()->id)->orderBy('id', 'desc')
                                                                     ->simplePaginate(9);
-      
-         return view('commandes.index')->with('commandes',$commandes);
+
+         return view('Commandes.index')->with('commandes',$commandes);
     }
 
     /**
@@ -59,12 +59,12 @@ class CommandeController extends Controller
             $result = Commande::whereIn('etat' ,$etat)
                     ->where('id_client',$commande->id_client)
                     ->get();
-            if (count($result) > 0) {  
+            if (count($result) > 0) {
                 return redirect('/plats')->with('message' , 'cette table a une commande non paye
                                                     (vous ne pouvez pas lancer une autre qu\'apres payer la premiere');
             }
             $commande->type ='interne';
-        }        
+        }
         $commande->save();
         $commande->plat()->attach($plats);
 

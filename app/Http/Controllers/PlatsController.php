@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\plat;
-use App\user;
+use App\Plat;
+use App\User;
 
 class PlatsController extends Controller
 {
@@ -30,7 +30,7 @@ class PlatsController extends Controller
 
             $plats =Plat::simplePaginate(6);
 
-            return view('plats.index')->with("plats",$plats)
+            return view('Plats.index')->with("plats",$plats)
                                         ->with("message",$req->message);
     }
 
@@ -42,7 +42,7 @@ class PlatsController extends Controller
     public function create()
     {
         //
-        return view('plats.create');
+        return view('Plats.create');
     }
 
     /**
@@ -64,7 +64,7 @@ class PlatsController extends Controller
             'ingrediant' => 'required',
             'cover_image' => 'image|max:1999',
         ]);
-        
+
         //handle file upload
         if($request -> hasFile('cover_image')){
             //get filename with the extension
@@ -76,13 +76,13 @@ class PlatsController extends Controller
             //file name to store
             $fileNameToStore = $filename.'_'.time().'.'.$extension;
             //upload image
-             $request->file('cover_image')->storeAs('public/cover_images', $fileNameToStore);          
+             $request->file('cover_image')->storeAs('public/cover_images', $fileNameToStore);
         }
         else{
             $fileNameToStore = 'noimage.jpg';
         }
-        
-        
+
+
         $plat = new plat;
 
         $plat->nom = $request->input('nom');
@@ -105,10 +105,10 @@ class PlatsController extends Controller
      */
     public function show($id)
     {
-        //returner le plate de l'id $id 
+        //returner le plate de l'id $id
         $plat = plat::find($id);
-        
-        return view('plats.show')->with('plat',$plat);
+
+        return view('Plats.show')->with('plat',$plat);
     }
 
     /**
@@ -128,7 +128,7 @@ class PlatsController extends Controller
     {
         $plat = plat::find($id);
         $user= user::find(auth()->user()->id);
-        return view('plats.edit')->with('plat',$plat)->with('user',$user);
+        return view('Plats.edit')->with('plat',$plat)->with('user',$user);
     }
 
     /**
@@ -149,7 +149,7 @@ class PlatsController extends Controller
             'cover_image' => 'image|max:1999',
         ]);
         $plat = Plat::find($id);
-        
+
             //handle file upload
         if($request -> hasFile('cover_image')){
             //get filename with the extension
@@ -163,7 +163,7 @@ class PlatsController extends Controller
             //upload image
              $request->file('cover_image')->storeAs('public/cover_images', $fileNameToStore);
              //modifier la photo
-             $plat->cover_image=$fileNameToStore;          
+             $plat->cover_image=$fileNameToStore;
         }
 
         $plat->nom = $request->input('nom');

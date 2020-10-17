@@ -43,7 +43,7 @@ class AdminController extends Controller
         ]);
 
 
-            $user = new User;    
+            $user = new User;
 
             $user->nom = $request->input('nom');
             $user->email = $request->input('email');
@@ -51,7 +51,7 @@ class AdminController extends Controller
             $user->adresse=$request->input('adresse');
             $user->num_tel= $request->input('num_tel');
             $user->type_client=$request->input('type_client');
-            
+
             $user->save();
 
             return Redirect::to('/register_user')->with('message','Utilisateur ajouté avec succès');
@@ -70,7 +70,7 @@ class AdminController extends Controller
                     'adresse'=>$request->input('adresse'.$id),
                     'num_tel'=>$request->input('num_tel'.$id),
                         ]);
-    
+
             return redirect('/all_users')->with('success','profile mis à jour avec succès');
         }
 
@@ -84,7 +84,7 @@ class AdminController extends Controller
                         ]);
         }
 
-        
+
         public function getAllCommandes()
         {
             $commandes = Commande::all();
@@ -103,10 +103,10 @@ class AdminController extends Controller
     public function adminHome(){
         return view('admins.home');
     }
-    
+
     public function registerUserRoute(){
-        
-        return view('admins.registerUser');
+
+        return view('admins.RegisterUser');
     }
 
 }

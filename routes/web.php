@@ -42,22 +42,22 @@ Route::get('/tr', 'PagesController@testRobvan')->middleware('auth');
 
 Route::get('/panier','PagesController@modifierPanier');
 
-Route::get('/listeCommandes','pagesController@listeCommandes')->middleware('role:responsable,chef_cuisinier]');
-Route::get('/listeServeur','pagesController@listeServeur')->middleware('role:serveur');
-Route::get('/listeCaissier','pagesController@listeCaissier')->middleware('role:caissier');
+Route::get('/listeCommandes','PagesController@listeCommandes')->middleware('role:responsable,chef_cuisinier]');
+Route::get('/listeServeur','PagesController@listeServeur')->middleware('role:serveur');
+Route::get('/listeCaissier','PagesController@listeCaissier')->middleware('role:caissier');
 
 
 
 
-Route::post('/etatCommande','pagesController@etatCommande');
+Route::post('/etatCommande','PagesController@etatCommande');
 
 Route::post('/removePlatFromPanier','PagesController@removePlatFromPanier');
 
 //-----------------------end pages controller-------------------------------
 
-Route::resource('plats','platsController');
+Route::resource('plats','PlatsController');
 
-Route::post('/sendAjax','platsController@addToCart');
+Route::post('/sendAjax','PlatsController@addToCart');
 
 /*Route::get('/test',function(){
 
@@ -65,13 +65,13 @@ Route::post('/sendAjax','platsController@addToCart');
 
 });*/
 
-Route::resource('commandes','commandeController');
+Route::resource('commandes','CommandeController');
 
 Route::resource('messages','MessageController');
 
 Route::post('/storeMessage','MessageController@store');
 
-// admin routes 
+// admin routes
 Route::get('/adminHome','AdminController@adminHome');
 
 Route::get('/register_user','AdminController@registerUserRoute');
@@ -89,5 +89,5 @@ Route::get('/listAdmin','AdminController@getAllCommandes');
 //for notifications
 
 Route::post('/notification','PagesController@getNotification');
-Route::post('/countNotifications','pagesController@countNotifications');
+Route::post('/countNotifications','PagesController@countNotifications');
 

@@ -17,12 +17,21 @@ class IsAdmin
     public function handle($request, Closure $next)
     {
 
-        if(auth()->user()->type_client=='admin')
-        return $next($request);
 
+
+        if(auth()->user() ==null){
+
+            return redirect('login');
+        }
         else
-        return redirect('login');
+        {
+            if(auth()->user()->type_client=='admin')
+                return $next($request);
 
-  
+            else
+                return redirect('login');
+        }
+
+
     }
 }
